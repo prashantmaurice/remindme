@@ -1,10 +1,14 @@
 <ion-view title="Friends" hide-nav-bar="true">
-  <ion-content id="map_cont" ng-init="initialize()">
+  <ion-content id="map_cont" ng-init="initialize()" scroll="false">
   	<div style="height:60%"><div id="map-canvas2" style="height:100%"></div></div>
-    <ion-list style="height:50%">
-      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/places/{{friend.id}}">
-        {{friend.name}}
-      </ion-item>
-    </ion-list>
+  	<div style="height:40%">
+  	<ion-scroll has-bouncing="true">
+	    <ion-list >
+	      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/places/{{friend.id}}">
+	        {{friend.name}}
+	      </ion-item>
+	    </ion-list>
+    </ion-scroll>
+    </div>
   </ion-content>
 </ion-view>

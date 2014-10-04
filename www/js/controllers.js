@@ -9,8 +9,8 @@ angular.module('starter.controllers', [])
   $scope.friends = Friends.all();
   $scope.initialize = function() {
         var mapOptions = {
-          zoom: 8,
-          center: new google.maps.LatLng(-34.397, 150.644)
+          zoom: 14,
+          center: new google.maps.LatLng(12.983662, 77.638499)
         };
         map = new google.maps.Map(document.getElementById('map-canvas2'),
             mapOptions);
