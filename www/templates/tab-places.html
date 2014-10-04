@@ -1,6 +1,7 @@
-<ion-view title="Friends">
-  <ion-content>
-    <ion-list>
+<ion-view title="Friends" hide-nav-bar="true">
+  <ion-content id="map_cont" ng-init="initialize()">
+  	<div style="height:60%"><div id="map-canvas2" style="height:100%"></div></div>
+    <ion-list style="height:50%">
       <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/places/{{friend.id}}">
         {{friend.name}}
       </ion-item>
