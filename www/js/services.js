@@ -38,9 +38,12 @@ services.factory('Places', function() {
     get: function(friendId) {
       // Simple index lookup
       for(var i=0;i< friends.length;i++){
-          if(friendId==friends[i].id) return friendId[i];
+          if(friendId==friends[i].id) return friends[i];
       }
       return null;
+    },
+    getall : function(){
+        return friends;
     },
     categories : function(){
         return categories;

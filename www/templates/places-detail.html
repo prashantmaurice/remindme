@@ -4,11 +4,26 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view title="places-detail" hide-nav-bar="false" >
-    <div class="bar bar-header">
-        <h2 class="title">Sub Header</h2>
-        <button class="button" ng-click="goBack()">Back</button>
-    </div>
-    <ion-content padding="true" style="padding-top: 50px">This is an excellent restaurant{{friend.name}}
+<ion-view title="details" hide-nav-bar="false" >
+    <ion-content padding="true" style="padding-top: 50px">
+        <div class="list card">
+            <div class="item item-avatar">
+                <h2>{{place.name}}</h2>
+                <p>Nine Inch Nails</p>
+            </div>
+            <a href="#" class="item item-icon-left" ng-hide="{{place.contact.formattedPhone==null}}">
+                <i class="icon ion-ios7-telephone"></i>
+                {{place.contact.formattedPhone}}
+            </a>
+            <a href="#" class="item item-icon-left" ng-hide="{{place.location.formattedAddress==null}}">
+                <i class="icon ion-flag"></i>
+                {{place.location.formattedAddress.join(", ")}}
+            </a>
+            <a class="item item-icon-left assertive" href="#" ng-hide="{{place.categories.shortName==null}}">
+                <i class="icon ion-music-note"></i>
+                {{place.categories.shortName==null}}
+            </a>
+
+        </div>
     </ion-content>
 </ion-view>

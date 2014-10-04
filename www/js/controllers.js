@@ -94,7 +94,9 @@ angular.module('starter.controllers', [])
 
 .controller('PlacesDetailCtrl', function($scope, $stateParams, Places) {
         console.log($stateParams.friendId);
-    $scope.friend = Places.get(1);
+        console.log(Places.getall());
+        console.log(Places.get($stateParams.friendId));
+    $scope.place = Places.get($stateParams.friendId);
     $scope.goBack = function() {
         alert('working');
         $ionicNavBarDelegate.back();
