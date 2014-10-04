@@ -37,10 +37,17 @@ services.factory('Places', function() {
     },
     get: function(friendId) {
       // Simple index lookup
-      return friends[friendId];
+      for(var i=0;i< friends.length;i++){
+          if(friendId==friends[i].id) return friendId[i];
+      }
+      return null;
     },
     categories : function(){
         return categories;
+    },
+    set: function(markers){
+        friends = markers;
+        return friends;
     }
   }
 });

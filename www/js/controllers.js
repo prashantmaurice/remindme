@@ -77,6 +77,8 @@ angular.module('starter.controllers', [])
                 });
                 markers.push(marker);
             }
+            Places.set($scope.places);
+            console.log($scope.places);
 
 
         }, function(err) {
@@ -90,8 +92,13 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('PlacesDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
+.controller('PlacesDetailCtrl', function($scope, $stateParams, Places) {
+        console.log($stateParams.friendId);
+    $scope.friend = Places.get(1);
+    $scope.goBack = function() {
+        alert('working');
+        $ionicNavBarDelegate.back();
+    };
 })
 
 .controller('AccountCtrl', function($scope) {
