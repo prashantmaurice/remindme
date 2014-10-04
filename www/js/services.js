@@ -3,7 +3,7 @@ var services = angular.module('starter.services', []);
 /**
  * A simple example service that returns some data.
  */
-services.factory('Friends', function() {
+services.factory('Places', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -11,8 +11,17 @@ services.factory('Friends', function() {
     { id: 0, name: 'Scruff McGruff' },
     { id: 1, name: 'G.I. Joe' },
     { id: 2, name: 'Miss Frizzle' },
-    { id: 3, name: 'Ash Ketchum' }
+    { id: 3, name: 'Ash Ketchum' },
+    { id: 4, name: 'Miss Frizzle' },
+    { id: 5, name: 'Ash Ketchum' },
+    { id: 6, name: 'Miss Frizzle' },
+    { id: 7, name: 'Ash Ketchum' },
+    { id: 8, name: 'Miss Frizzle' },
+    { id: 9, name: 'Ash Ketchum' }
   ];
+
+  //get data from server
+
 
   return {
     all: function() {

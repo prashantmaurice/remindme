@@ -4,8 +4,8 @@
   	<div style="height:40%">
   	<ion-scroll has-bouncing="true">
 	    <ion-list >
-	      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/places/{{friend.id}}">
-	        {{friend.name}}
+	      <ion-item ng-repeat="place in places" type="item-text-wrap" href="#/tab/places/{{place.id}}">
+	        {{place.name}}
 	      </ion-item>
 	    </ion-list>
     </ion-scroll>
