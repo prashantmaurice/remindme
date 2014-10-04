@@ -19,6 +19,14 @@ services.factory('Places', function() {
     { id: 8, name: 'Miss Frizzle' },
     { id: 9, name: 'Ash Ketchum' }
   ];
+    var categories = [
+        { id: 0, name: 'Restaurent' },
+        { id: 1, name: 'Petrol' },
+        { id: 2, name: 'KFC' },
+        { id: 2, name: 'bar' },
+        { id: 2, name: 'Super markets' }
+
+    ];
 
   //get data from server
 
@@ -30,6 +38,9 @@ services.factory('Places', function() {
     get: function(friendId) {
       // Simple index lookup
       return friends[friendId];
+    },
+    categories : function(){
+        return categories;
     }
   }
 });
