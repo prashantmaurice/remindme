@@ -7,6 +7,7 @@ angular.module('starter.controllers', [])
 
 .controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate) {
   	$scope.categories = Places.categories();
+    $scope.currQuery = "petrol";
     $scope.CLientID = 'B212RBDANHUAROAMLQDQ5RNLMXBAPHDYL52RB3ZLP3ELMJHD';
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
@@ -48,7 +49,7 @@ angular.module('starter.controllers', [])
             map.setCenter(marker_mylocation.position);
 //            console.log(marker_mylocation.position);
             $scope.myLatlng  = marker_mylocation.position;
-            $scope.getPlaces(marker_mylocation.position.k,marker_mylocation.position.B,"restaurent");
+            $scope.getPlaces(marker_mylocation.position.k,marker_mylocation.position.B,$scope.currQuery);
             //removeMarkers();
         }
         function removeMarkers(){
@@ -63,6 +64,7 @@ angular.module('starter.controllers', [])
         $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B, query);
     }
     $scope.getPlaces = function(lat,long,query) {
+        $scope.currQuery = query;
         $http.get($scope.api+'&ll='+lat+','+long+'&query='+query+'').then(function(resp) {
             //$scope. = resp.data.conditions
             $scope.places = resp.data.response.venues;
@@ -83,7 +85,7 @@ angular.module('starter.controllers', [])
                 });
                 markers.push(marker);
             }
-            $ionicSlideBoxDelegate.enableSlide(false);//disable slider
+            //$ionicSlideBoxDelegate.enableSlide(false);//disable slider
             Places.set($scope.places);
             console.log($scope.places);
 
