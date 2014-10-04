@@ -24,7 +24,10 @@ services.factory('Places', function() {
         { id: 1, name: 'Petrol' },
         { id: 2, name: 'KFC' },
         { id: 2, name: 'bar' },
-        { id: 2, name: 'Super markets' }
+        { id: 2, name: 'Super markets' },
+        { id: 2, name: 'MC Donalds' },
+        { id: 2, name: 'pub' },
+        { id: 2, name: 'chinese' }
 
     ];
 

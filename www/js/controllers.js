@@ -85,7 +85,7 @@ angular.module('starter.controllers', [])
                 });
                 markers.push(marker);
             }
-            //$ionicSlideBoxDelegate.enableSlide(false);//disable slider
+            $ionicSlideBoxDelegate.enableSlide(false);//disable slider
             Places.set($scope.places);
             console.log($scope.places);
 
