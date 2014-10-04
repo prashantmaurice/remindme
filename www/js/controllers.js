@@ -12,6 +12,7 @@ angular.module('starter.controllers', [])
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
     $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
+    $scope.radius = 10000;
   	$scope.initialize = function() {
 //        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -27,16 +28,37 @@ angular.module('starter.controllers', [])
         };
         map = new google.maps.Map(document.getElementById('map-canvas2'),mapOptions);
         var image = 'img/marker1.png';
-        var marker_mylocation = new google.maps.Marker({
-            position: $scope.myLatlng,
+//        var marker_mylocation = new google.maps.Marker({
+//            position: $scope.myLatlng,
+//            map: map,
+//            draggable:true,
+//            icon: image,
+//            animation: google.maps.Animation.DROP,
+//            title: 'Hello World!'
+//        });
+//        google.maps.event.addListener(marker_mylocation, 'click', toggleBounce);
+
+        var populationOptions = {
+            strokeColor: '#3399FF',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#3399FF',
+            fillOpacity: 0.1,
             map: map,
-            draggable:true,
-            icon: image,
-            animation: google.maps.Animation.DROP,
-            title: 'Hello World!'
-        });
-        google.maps.event.addListener(marker_mylocation, 'click', toggleBounce);
-        google.maps.event.addListener(marker_mylocation, 'dragend', reDrawMarkers );
+            icon: {
+                url: "https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png",
+                size: new google.maps.Size(7, 7),
+                anchor: new google.maps.Point(4, 4)
+            },
+            center: $scope.myLatlng,
+            editable : true,
+            radius: $scope.radius
+        };
+        // Add the circle for this city to the map.
+        var cityCircle = new google.maps.Circle(populationOptions);
+        google.maps.event.addListener(cityCircle, 'center_changed', reDrawMarkers );
+        google.maps.event.addListener(cityCircle, 'radius_changed', reDrawMarkers);
+
         function toggleBounce() {
             if (marker_mylocation.getAnimation() != null) {
                 marker_mylocation.setAnimation(null);
@@ -45,11 +67,13 @@ angular.module('starter.controllers', [])
             }
         }
         function reDrawMarkers(){
+//            console.log(cityCircle.radius);
             //marker_mylocation.getPosition()
-            map.setCenter(marker_mylocation.position);
+            map.setCenter(cityCircle.center);
 //            console.log(marker_mylocation.position);
-            $scope.myLatlng  = marker_mylocation.position;
-            $scope.getPlaces(marker_mylocation.position.k,marker_mylocation.position.B,$scope.currQuery);
+            $scope.myLatlng  = cityCircle.center;
+            $scope.radius = cityCircle.radius;
+            $scope.getPlaces(cityCircle.center.k,cityCircle.center.B,$scope.currQuery);
             //removeMarkers();
         }
         function removeMarkers(){
@@ -76,6 +100,7 @@ angular.module('starter.controllers', [])
                 //console.log($scope.places[i]);
                 $scope.places[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
                     new google.maps.LatLng($scope.places[i].location.lat, $scope.places[i].location.lng));
+                if($scope.places[i].distance>$scope.radius) continue;
                 var marker = new google.maps.Marker({
                     position:  new google.maps.LatLng($scope.places[i].location.lat, $scope.places[i].location.lng),
                     //animation: google.maps.Animation.DROP,
