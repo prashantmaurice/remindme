@@ -38,31 +38,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     // Each tab has its own nav history stack:
 
-    .state('tab.dash', {
-      url: '/dash',
+    .state('tab.cards', {
+      url: '/cards',
       views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
-          controller: 'DashCtrl'
+        'tab-cards': {
+          templateUrl: 'templates/tab-cards.html',
+          controller: 'CardsCtrl'
         }
       }
     })
 
-    .state('tab.friends', {
-      url: '/friends',
+    .state('tab.places', {
+      url: '/places',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
+        'tab-places': {
+          templateUrl: 'templates/tab-places.html',
+          controller: 'PlacesCtrl'
         }
       }
     })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
+    .state('tab.places-detail', {
+      url: '/places/:friendId',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
+        'tab-places': {
+          templateUrl: 'templates/places-detail.html',
+          controller: 'PlacesDetailCtrl'
         }
       }
     })
@@ -73,12 +73,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-account': {
           templateUrl: 'templates/tab-account.html',
           controller: 'AccountCtrl'
+
+          //  controller: 'PlacesDetailCtrl'
         }
       }
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/cards');
 
 });
 

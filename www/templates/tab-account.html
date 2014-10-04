@@ -1,6 +1,22 @@
 <ion-view title="Account">
-  <ion-content id="map_cont" ng-init="initialize()">
-  			<div id="map-canvas2" style="height:100%"></div>		
-      
-    </ion-content>
+
+        <ion-content id="map_cont" ng-init="initialize()" scroll="false">
+            <ion-slide-box show-pager="false">
+                <ion-slide>
+                    <div class="box blue">
+                        <button ng-click="nextSlide()">Next slide!</button>
+                        asdgjkasg
+                        sajdlgkhkfjs
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="box red">
+                        <button ng-click="prevSlide()">Prev slide!</button>
+                        asdgjkasg
+                        sajdlgkhkfjs
+                        Slide 2!
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+        </ion-content>
 </ion-view>

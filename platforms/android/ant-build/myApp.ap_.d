@@ -38,6 +38,8 @@
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/marker_restaurent.png \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/marker1.png \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/ionic.png \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.ionic.keyboard \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.device \
@@ -114,10 +116,10 @@
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic/js/angular/angular-resource.min.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic/js/angular-ui/angular-ui-router.min.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic/js/angular-ui/angular-ui-router.js \
-/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-dash.html \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/places-detail.html \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tabs.html \
-/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-friends.html \
-/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/friend-detail.html \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-cards.html \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-places.html \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-account.html \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js/app.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js/services.js \

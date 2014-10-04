@@ -31,28 +31,33 @@
             <ion-slide>
                 <div class="list card">
                     <div class="item tabs tabs-secondary tabs-icon-left">
-                        <a class="tab-item left" ng-click="prevSlide()">
-                            <i class="icon ion-chevron-left"></i>
+                        <a class="tab-item" ng-click="prevSlide()">
+                            <i class="icon ion-thumbsup"></i>
                             back
                         </a>
-                        <a class="tab-item" style="font-size: 20px;color:#fff">{{clickedPlace.name}}</a>
-
                         <a class="tab-item" href="#/tab/places/{{clickedPlace.id}}">
-                            <i class="icon ion-chevron-right"></i>
+                            <i class="icon ion-chatbox"></i>
                             Details
                         </a>
                     </div>
-                    <div class="item">
-                        <p>
+                    <div class="item item-avatar">
+                        <h2>{{clickedPlace.name}}</h2>
+                        <p>Nine Inch Nails</p>
+                    </div>
+                    <a href="#" class="item item-icon-left" >
                         <i class="icon ion-ios7-telephone"></i>
-                        {{clickedPlace.contact.formattedPhone}}<br>
+                        {{clickedPlace.contact.formattedPhone}}
+                    </a>
+                    <a href="#" class="item item-icon-left">
                         <i class="icon ion-flag"></i>
-                        {{clickedPlace.location.formattedAddress.join(", ")}}<br>
+                        {{clickedPlace.location.formattedAddress.join(", ")}}
+                    </a>
+                    <a class="item item-icon-left assertive" href="#" ng-hide="{{clickedPlace.categories.shortName==null}}">
                         <i class="icon ion-music-note"></i>
                         {{clickedPlace.categories.shortName==null}}{{clickedPlace.distance}}
-                        </p>
-                    </div>
-
+                    </a>
+                    <button >Back</button>
+                    <button >Details</button>
 
                 </div>
             </ion-slide>

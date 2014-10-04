@@ -1,0 +1,17 @@
+<ion-view title="Available Cards">
+  <ion-content class="padding">
+    <div class="card"  ng-repeat="card in cards">
+	  <div class="item item-text-wrap">
+	  	<div class="row">
+		  <div class="col col-90">{{card.name}}</div>
+		  <div class="col">
+		    <label class="checkbox">
+		       <input type="checkbox" ng-click="card.selected=!card.selected" ng-checked="card.selected" 
+		       ng-model="card.selected">
+		    </label>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </ion-content>
+</ion-view>

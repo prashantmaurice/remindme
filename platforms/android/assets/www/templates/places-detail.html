@@ -14,8 +14,12 @@
             <a href="#" class="item item-icon-left" ng-hide="{{place.contact.formattedPhone==null}}">
                 <i class="icon ion-ios7-telephone"></i>
                 {{place.contact.formattedPhone}}
+            </a>
+            <a href="#" class="item item-icon-left" ng-hide="{{place.location.formattedAddress==null}}">
                 <i class="icon ion-flag"></i>
                 {{place.location.formattedAddress.join(", ")}}
+            </a>
+            <a class="item item-icon-left assertive" href="#" ng-hide="{{place.categories.shortName==null}}">
                 <i class="icon ion-music-note"></i>
                 {{place.categories.shortName==null}}{{place.distance}}
             </a>

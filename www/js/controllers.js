@@ -5,15 +5,21 @@ angular.module('starter.controllers', [])
 	$scope.cards = Cards.all();
 })
 
-.controller('PlacesCtrl', function($scope, Places, $http) {
+.controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate) {
   	$scope.categories = Places.categories();
-
     $scope.CLientID = 'B212RBDANHUAROAMLQDQ5RNLMXBAPHDYL52RB3ZLP3ELMJHD';
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
     $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
   	$scope.initialize = function() {
-        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
+//        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+        function showPosition(position) {
+//            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+            console.log("position set to :"+position.coords.latitude+"==="+position.coords.longitude);
+            $scope.myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        }
         var mapOptions = {
           zoom: 12,
           center: $scope.myLatlng
@@ -77,6 +83,7 @@ angular.module('starter.controllers', [])
                 });
                 markers.push(marker);
             }
+            $ionicSlideBoxDelegate.enableSlide(false);//disable slider
             Places.set($scope.places);
             console.log($scope.places);
 
@@ -88,6 +95,19 @@ angular.module('starter.controllers', [])
 
     };
     $scope.getPlaces(12.983662, 77.638499,'kfc');
+
+    //slider code
+    $scope.nextSlide = function() {
+        $ionicSlideBoxDelegate.next();
+    };
+    $scope.prevSlide = function() {
+        $ionicSlideBoxDelegate.previous();
+    };
+    $scope.showDetails = function(place){
+        $scope.clickedPlace = place;
+        console.log(place.id);
+        $ionicSlideBoxDelegate.next();
+    }
 
 
 })
@@ -103,6 +123,15 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('AccountCtrl', function($scope) {
-      
+.controller('AccountCtrl', function($scope,$ionicSlideBoxDelegate) {
+        $scope.nextSlide = function() {
+            $ionicSlideBoxDelegate.next();
+            $ionicSlideBoxDelegate.enableSlide(false);
+        };
+        $scope.prevSlide = function() {
+            $ionicSlideBoxDelegate.previous();
+            $ionicSlideBoxDelegate.enableSlide(false);
+        };
+
+        $ionicSlideBoxDelegate.next();
 });
