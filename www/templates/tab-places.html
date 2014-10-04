@@ -11,7 +11,12 @@
   	<ion-scroll has-bouncing="true">
 	    <ion-list >
 	      <ion-item ng-repeat="place in places" type="item-text-wrap" href="#/tab/places/{{place.id}}">
-	        {{place.name}}
+              <i class="icon ion-pizza"></i>
+              <span style="padding-left: 20px">{{place.name}}</span>
+
+              <span class="item-note">
+                {{(place.distance/1000).toFixed(2);}}km
+              </span>
 	      </ion-item>
 	    </ion-list>
     </ion-scroll>

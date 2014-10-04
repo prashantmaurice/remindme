@@ -65,7 +65,9 @@ angular.module('starter.controllers', [])
                 markers[i].setMap(null);
             }
             for(var i=0;i< $scope.places.length;i++){
-                console.log($scope.places[i]);
+                //console.log($scope.places[i]);
+                $scope.places[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
+                    new google.maps.LatLng($scope.places[i].location.lat, $scope.places[i].location.lng));
                 var marker = new google.maps.Marker({
                     position:  new google.maps.LatLng($scope.places[i].location.lat, $scope.places[i].location.lng),
                     //animation: google.maps.Animation.DROP,
