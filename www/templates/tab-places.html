@@ -17,16 +17,14 @@
             <ion-slide>
                 <div class="box blue" style="height:200px;" >
                     <ion-scroll direction="y" style="width: 100%; height: 2000px" scroll="false">
-                    <div style="height:{{113*places.length}}px">
-                        <ion-list style="">
-                            <ion-item ng-repeat="place in places | orderBy:'distance'" type="item-text-wrap"  ng-click="showDetails(place)" >
-                                <span style="font-size: 1.2em">{{place.name}}</span><br>
-                                <span style="font-size: 0.8em">{{place.location.address}}</span>
-                                  <span class="item-note">
-                                    {{(place.distance/1000).toFixed(2);}}km
-                                  </span>
-                            </ion-item>
-                        </ion-list>
+                    <div style="height:{{212*places.length+500}}px"><!--TODO: set it automatic bound -->
+                        <div class="list_item" ng-repeat="place in places | orderBy:'distance'" type="item-text-wrap"  ng-click="showDetails(place)" >
+                            <span style="font-size: 1.2em">{{place.name}}</span><br>
+                            <span style="font-size: 0.8em;color:#777">{{place.location.address}}</span>
+                              <span class="item-note">
+                                {{(place.distance/1000).toFixed(2);}}km
+                              </span>
+                        </div>
                     </div>
                     </ion-scroll>
                 </div>
@@ -48,12 +46,15 @@
                     <div class="item">
                         <p>
                         <i class="icon ion-ios7-telephone"></i>
-                        {{clickedPlace.contact.formattedPhone}}<br>
+                        <span ng-bind="clickedPlace.contact.formattedPhone">
+
+                        </span><br>
                         <i class="icon ion-flag"></i>
                         {{clickedPlace.location.formattedAddress.join(", ")}}<br>
                         <i class="icon ion-music-note"></i>
-                        {{(clickedPlace.distance/1000).toFixed(2)}}km
+                        {{(clickedPlace.distance/1000).toFixed(2)}}km2
                         </p>
+
                     </div>
 
 

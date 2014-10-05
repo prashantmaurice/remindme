@@ -113,6 +113,8 @@ angular.module('starter.controllers', [])
                     title: 'Hello World!'
                 });
                 marker.id = placesTemp[i].id;
+                marker.place = placesTemp[i];
+                google.maps.event.addListener(marker, 'click', function(marker){console.log(this) ; $scope.mapMarkerClick(this)});
                 markers.push(marker);
                 $scope.places.push(placesTemp[i]);
 
@@ -128,6 +130,15 @@ angular.module('starter.controllers', [])
         });
 
     };
+    $scope.mapMarkerClick = function(marker2) {
+        for(var i=0;i< $scope.places.length;i++){
+            if(marker2.id == $scope.places[i].id) {$scope.clickedPlace = $scope.places[i];$scope.clickedPlace.distance = $scope.places[i].distance;}
+        }
+//        $scope.clickedPlace = marker2.place;
+//        console.log(marker2);
+        $scope.showDetails(marker2.place);
+//        $ionicSlideBoxDelegate.next();
+    };
     $scope.getPlaces(12.983662, 77.638499,'kfc');
 
     //slider code
@@ -142,13 +153,13 @@ angular.module('starter.controllers', [])
         var image2 = 'img/marker1.png';
 
         $scope.clickedPlace = place;
-        console.log(place.id);
+        //console.log(place.id);
 
         //copied from getPlaces function above
         var placesTemp = $scope.places;
         $scope.places=[];
         var image = 'img/marker_restaurent.png';
-        var image2 = 'img/marker1.png';
+        var image2 = 'img/marker_restaurent_high.png';
         for (var i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
         }
@@ -166,15 +177,18 @@ angular.module('starter.controllers', [])
             });
             if($scope.clickedPlace.id==placesTemp[i].id) map.panTo(marker.position);
             marker.id = placesTemp[i].id;
+            marker.place = placesTemp[i];
+            google.maps.event.addListener(marker, 'click', function(marker){console.log(this) ; $scope.mapMarkerClick(this)});
             markers.push(marker);
             $scope.places.push(placesTemp[i]);
 
         }
         $ionicSlideBoxDelegate.enableSlide(false);//disable slider
         Places.set($scope.places);
-        console.log($scope.places);
+        //console.log($scope.places);
 
 
+        $ionicSlideBoxDelegate.previous();
         $ionicSlideBoxDelegate.next();
     }
 
