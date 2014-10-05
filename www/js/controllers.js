@@ -20,7 +20,9 @@ angular.module('starter.controllers', [])
         function showPosition(position) {
 //            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
             console.log("position set to :"+position.coords.latitude+"==="+position.coords.longitude);
-            $scope.myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            $scope.myLatlng.latitude = position.coords.latitude;
+            $scope.myLatlng.longitude = position.coords.longitude;
+
         }
         var mapOptions = {
           zoom: 12,
@@ -91,24 +93,29 @@ angular.module('starter.controllers', [])
         $scope.currQuery = query;
         $http.get($scope.api+'&ll='+lat+','+long+'&query='+query+'').then(function(resp) {
             //$scope. = resp.data.conditions
-            $scope.places = resp.data.response.venues;
+            var placesTemp = resp.data.response.venues;
+            $scope.places=[];
             var image = 'img/marker_restaurent.png';
+            var image2 = 'img/marker1.png';
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(null);
             }
-            for(var i=0;i< $scope.places.length;i++){
+            for(var i=0;i< placesTemp.length;i++){
                 //console.log($scope.places[i]);
-                $scope.places[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
-                    new google.maps.LatLng($scope.places[i].location.lat, $scope.places[i].location.lng));
-                if($scope.places[i].distance>$scope.radius) continue;
+                placesTemp[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
+                    new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng));
+                if(placesTemp[i].distance>$scope.radius) continue;
                 var marker = new google.maps.Marker({
-                    position:  new google.maps.LatLng($scope.places[i].location.lat, $scope.places[i].location.lng),
+                    position:  new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng),
                     //animation: google.maps.Animation.DROP,
                     map: map,
                     icon:image,
                     title: 'Hello World!'
                 });
+                marker.id = placesTemp[i].id;
                 markers.push(marker);
+                $scope.places.push(placesTemp[i]);
+
             }
             $ionicSlideBoxDelegate.enableSlide(false);//disable slider
             Places.set($scope.places);
@@ -131,8 +138,43 @@ angular.module('starter.controllers', [])
         $ionicSlideBoxDelegate.previous();
     };
     $scope.showDetails = function(place){
+        var image = 'img/marker_restaurent.png';
+        var image2 = 'img/marker1.png';
+
         $scope.clickedPlace = place;
         console.log(place.id);
+
+        //copied from getPlaces function above
+        var placesTemp = $scope.places;
+        $scope.places=[];
+        var image = 'img/marker_restaurent.png';
+        var image2 = 'img/marker1.png';
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+        for(var i=0;i< placesTemp.length;i++){
+            //console.log($scope.places[i]);
+            placesTemp[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
+                new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng));
+            if(placesTemp[i].distance>$scope.radius) continue;
+            var marker = new google.maps.Marker({
+                position:  new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng),
+                //animation: google.maps.Animation.DROP,
+                map: map,
+                icon:($scope.clickedPlace.id==placesTemp[i].id)?image2:image,
+                title: 'Hello World!'
+            });
+            if($scope.clickedPlace.id==placesTemp[i].id) map.panTo(marker.position);
+            marker.id = placesTemp[i].id;
+            markers.push(marker);
+            $scope.places.push(placesTemp[i]);
+
+        }
+        $ionicSlideBoxDelegate.enableSlide(false);//disable slider
+        Places.set($scope.places);
+        console.log($scope.places);
+
+
         $ionicSlideBoxDelegate.next();
     }
 

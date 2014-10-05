@@ -19,8 +19,8 @@
                     <ion-scroll direction="y" style="width: 100%; height: 2000px" scroll="false">
                     <div style="height:{{113*places.length}}px">
                         <ion-list style="">
-                            <ion-item ng-repeat="place in places | orderBy:'distance'" type="item-text-wrap"  ng-click="showDetails(place)">
-                                <h2>{{place.name}}</h2>
+                            <ion-item ng-repeat="place in places | orderBy:'distance'" type="item-text-wrap"  ng-click="showDetails(place)" >
+                                <span style="font-size: 1.2em">{{place.name}}</span><br>
                                 <span style="font-size: 0.8em">{{place.location.address}}</span>
                                   <span class="item-note">
                                     {{(place.distance/1000).toFixed(2);}}km
@@ -52,7 +52,7 @@
                         <i class="icon ion-flag"></i>
                         {{clickedPlace.location.formattedAddress.join(", ")}}<br>
                         <i class="icon ion-music-note"></i>
-                        {{clickedPlace.categories.shortName==null}}{{clickedPlace.distance}}
+                        {{(clickedPlace.distance/1000).toFixed(2)}}km
                         </p>
                     </div>
 
