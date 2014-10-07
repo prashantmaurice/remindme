@@ -11,19 +11,40 @@ angular.module('starter.controllers', [])
     $scope.CLientID = 'B212RBDANHUAROAMLQDQ5RNLMXBAPHDYL52RB3ZLP3ELMJHD';
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
-    $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
+    $scope.myLatlng = new google.maps.LatLng(13.057605, 80.228280);//default chennai
     $scope.radius = 10000;
-  	$scope.initialize = function() {
-//        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
-        navigator.geolocation.getCurrentPosition(showPosition);
 
-        function showPosition(position) {
+    //get position
+
+
+
+
+    $scope.initialize = function(){
+        $scope.showPosition = function (position) {
 //            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
-            console.log("position set to :"+position.coords.latitude+"==="+position.coords.longitude);
-            $scope.myLatlng.latitude = position.coords.latitude;
-            $scope.myLatlng.longitude = position.coords.longitude;
+            console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+            $scope.myLatlng.k = position.coords.latitude;
+            $scope.myLatlng.B = position.coords.longitude;
+            console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+            $scope.initialize2();
+//
+        };
+        navigator.geolocation.getCurrentPosition($scope.showPosition);
+    };
 
-        }
+  	$scope.initialize2 = function() {
+//        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
+//        navigator.geolocation.getCurrentPosition(showPosition);
+
+//        function showPosition(position) {
+////            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+//            console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//            $scope.myLatlng.k = position.coords.latitude;
+//            $scope.myLatlng.B = position.coords.longitude;
+//            console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//
+//        }
+        //$ionicLoading.show({ template: 'Initialize called!', noBackdrop: true, duration: 2000 });
         var mapOptions = {
           zoom: 12,
           center: $scope.myLatlng
@@ -84,20 +105,25 @@ angular.module('starter.controllers', [])
             }
         }
 
+        //last initialize
+        $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B,'kfc');
+
   	};
     var markers = [];
     $scope.getPlacesCurr = function(query) {
         $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B, query);
     }
     $scope.getPlaces = function(lat,long,query) {
+
         $scope.currQuery = query;
+        console.log("API:"+$scope.api+'&ll='+lat+','+long+'&query='+query+'');
         $http.get($scope.api+'&ll='+lat+','+long+'&query='+query+'').then(function(resp) {
             //$scope. = resp.data.conditions
             var placesTemp = resp.data.response.venues;
             $scope.places=[];
             var image = 'img/marker_restaurent.png';
             var image2 = 'img/marker1.png';
-            for (var i = 0; i < markers.length; i++) {
+            for (var i = 0; i < markers.leinitializength; i++) {
                 markers[i].setMap(null);
             }
             for(var i=0;i< placesTemp.length;i++){
@@ -139,7 +165,18 @@ angular.module('starter.controllers', [])
         $scope.showDetails(marker2.place);
 //        $ionicSlideBoxDelegate.next();
     };
-    $scope.getPlaces(12.983662, 77.638499,'kfc');
+//        $scope.showPosition = function (position) {
+////            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+//            console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//            $scope.myLatlng.k = position.coords.latitude;
+//            $scope.myLatlng.B = position.coords.longitude;
+//            console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//
+//        };
+//        console.log('check1');
+//        navigator.geolocation.getCurrentPosition($scope.showPosition);
+//        console.log('check2');
+    //$scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B,'kfc');
 
     //slider code
     $scope.nextSlide = function() {
