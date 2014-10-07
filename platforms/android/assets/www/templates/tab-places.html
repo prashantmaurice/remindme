@@ -2,62 +2,61 @@
     <div class="bar bar-header" style="height:50%;width: 100%;"><div id="map-canvas2" style="height:100%;width: 100%;"></div>
 
     </div>
-    <div class="bar bar-subheader" style="top:50%">
-        <div>
-            <button ng-repeat="category in categories" style="margin-right:3px" class="button button-small button-positive"
+    <div class="bar bar-subheader" style="top:50%; height:8%">
+        <ion-scroll direction="x" style="overflow: scroll;white-space: nowrap;">
+            <button ng-repeat="category in categories" style="margin-right:3px; height:100%" class="button button-small button-positive"
                     ng-click="getPlacesCurr(category.name)">
                 {{category.name}}
             </button>
-        </div>
+        </ion-scroll>
     </div>
 
-  <ion-content id="map_cont" style="top:60%">
-
-  	<div style="height:40%">
-        <ion-slide-box show-pager="false">
+  <ion-content id="map_cont" style="top:58%" scroll="false">
+  	<div style="height:100%">
+        <ion-slide-box show-pager="false" style="height:100%">
             <ion-slide>
-                <div class="box blue">
-                    <ion-list overflow-scroll="true">
-                        <ion-item ng-repeat="place in places" type="item-text-wrap"  ng-click="showDetails(place)">
-                            <i class="icon ion-pizza"></i>
-                            <span style="padding-left: 20px">{{place.name}}</span>
+                <div class="box blue" style="height:200px;" >
+                    <ion-scroll direction="y" style="width: 100%; height: 2000px" scroll="false">
+                    <div style="height:{{212*places.length+500}}px"><!--TODO: set it automatic bound -->
+                        <div class="list_item" ng-repeat="place in places | orderBy:'distance'" type="item-text-wrap"  ng-click="showDetails(place)" >
+                            <span style="font-size: 1.2em">{{place.name}}</span><br>
+                            <span style="font-size: 0.8em;color:#777">{{place.location.address}}</span>
                               <span class="item-note">
                                 {{(place.distance/1000).toFixed(2);}}km
                               </span>
-                        </ion-item>
-                    </ion-list>
+                        </div>
+                    </div>
+                    </ion-scroll>
                 </div>
             </ion-slide>
             <ion-slide>
                 <div class="list card">
                     <div class="item tabs tabs-secondary tabs-icon-left">
-                        <a class="tab-item" ng-click="prevSlide()">
-                            <i class="icon ion-thumbsup"></i>
+                        <a class="tab-item left" ng-click="prevSlide()">
+                            <i class="icon ion-chevron-left"></i>
                             back
                         </a>
+                        <a class="tab-item" style="font-size: 20px;color:#fff">{{clickedPlace.name}}</a>
+
                         <a class="tab-item" href="#/tab/places/{{clickedPlace.id}}">
-                            <i class="icon ion-chatbox"></i>
+                            <i class="icon ion-chevron-right"></i>
                             Details
                         </a>
                     </div>
-                    <div class="item item-avatar">
-                        <h2>{{clickedPlace.name}}</h2>
-                        <p>Nine Inch Nails</p>
-                    </div>
-                    <a href="#" class="item item-icon-left" >
+                    <div class="item">
+                        <p>
                         <i class="icon ion-ios7-telephone"></i>
-                        {{clickedPlace.contact.formattedPhone}}
-                    </a>
-                    <a href="#" class="item item-icon-left">
+                        <span ng-bind="clickedPlace.contact.formattedPhone">
+
+                        </span><br>
                         <i class="icon ion-flag"></i>
-                        {{clickedPlace.location.formattedAddress.join(", ")}}
-                    </a>
-                    <a class="item item-icon-left assertive" href="#" ng-hide="{{clickedPlace.categories.shortName==null}}">
+                        {{clickedPlace.location.formattedAddress.join(", ")}}<br>
                         <i class="icon ion-music-note"></i>
-                        {{clickedPlace.categories.shortName==null}}{{clickedPlace.distance}}
-                    </a>
-                    <button >Back</button>
-                    <button >Details</button>
+                        {{(clickedPlace.distance/1000).toFixed(2)}}km2
+                        </p>
+
+                    </div>
+
 
                 </div>
             </ion-slide>

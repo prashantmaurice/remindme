@@ -7,10 +7,12 @@ angular.module('starter.controllers', [])
 
 .controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate) {
   	$scope.categories = Places.categories();
+    $scope.currQuery = "petrol";
     $scope.CLientID = 'B212RBDANHUAROAMLQDQ5RNLMXBAPHDYL52RB3ZLP3ELMJHD';
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
     $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
+    $scope.radius = 10000;
   	$scope.initialize = function() {
 //        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -18,7 +20,9 @@ angular.module('starter.controllers', [])
         function showPosition(position) {
 //            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
             console.log("position set to :"+position.coords.latitude+"==="+position.coords.longitude);
-            $scope.myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            $scope.myLatlng.latitude = position.coords.latitude;
+            $scope.myLatlng.longitude = position.coords.longitude;
+
         }
         var mapOptions = {
           zoom: 12,
@@ -26,16 +30,37 @@ angular.module('starter.controllers', [])
         };
         map = new google.maps.Map(document.getElementById('map-canvas2'),mapOptions);
         var image = 'img/marker1.png';
-        var marker_mylocation = new google.maps.Marker({
-            position: $scope.myLatlng,
+//        var marker_mylocation = new google.maps.Marker({
+//            position: $scope.myLatlng,
+//            map: map,
+//            draggable:true,
+//            icon: image,
+//            animation: google.maps.Animation.DROP,
+//            title: 'Hello World!'
+//        });
+//        google.maps.event.addListener(marker_mylocation, 'click', toggleBounce);
+
+        var populationOptions = {
+            strokeColor: '#3399FF',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#3399FF',
+            fillOpacity: 0.1,
             map: map,
-            draggable:true,
-            icon: image,
-            animation: google.maps.Animation.DROP,
-            title: 'Hello World!'
-        });
-        google.maps.event.addListener(marker_mylocation, 'click', toggleBounce);
-        google.maps.event.addListener(marker_mylocation, 'dragend', reDrawMarkers );
+            icon: {
+                url: "https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png",
+                size: new google.maps.Size(7, 7),
+                anchor: new google.maps.Point(4, 4)
+            },
+            center: $scope.myLatlng,
+            editable : true,
+            radius: $scope.radius
+        };
+        // Add the circle for this city to the map.
+        var cityCircle = new google.maps.Circle(populationOptions);
+        google.maps.event.addListener(cityCircle, 'center_changed', reDrawMarkers );
+        google.maps.event.addListener(cityCircle, 'radius_changed', reDrawMarkers);
+
         function toggleBounce() {
             if (marker_mylocation.getAnimation() != null) {
                 marker_mylocation.setAnimation(null);
@@ -44,11 +69,13 @@ angular.module('starter.controllers', [])
             }
         }
         function reDrawMarkers(){
+//            console.log(cityCircle.radius);
             //marker_mylocation.getPosition()
-            map.setCenter(marker_mylocation.position);
+            map.setCenter(cityCircle.center);
 //            console.log(marker_mylocation.position);
-            $scope.myLatlng  = marker_mylocation.position;
-            $scope.getPlaces(marker_mylocation.position.k,marker_mylocation.position.B,"restaurent");
+            $scope.myLatlng  = cityCircle.center;
+            $scope.radius = cityCircle.radius;
+            $scope.getPlaces(cityCircle.center.k,cityCircle.center.B,$scope.currQuery);
             //removeMarkers();
         }
         function removeMarkers(){
@@ -63,25 +90,34 @@ angular.module('starter.controllers', [])
         $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B, query);
     }
     $scope.getPlaces = function(lat,long,query) {
+        $scope.currQuery = query;
         $http.get($scope.api+'&ll='+lat+','+long+'&query='+query+'').then(function(resp) {
             //$scope. = resp.data.conditions
-            $scope.places = resp.data.response.venues;
+            var placesTemp = resp.data.response.venues;
+            $scope.places=[];
             var image = 'img/marker_restaurent.png';
+            var image2 = 'img/marker1.png';
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(null);
             }
-            for(var i=0;i< $scope.places.length;i++){
+            for(var i=0;i< placesTemp.length;i++){
                 //console.log($scope.places[i]);
-                $scope.places[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
-                    new google.maps.LatLng($scope.places[i].location.lat, $scope.places[i].location.lng));
+                placesTemp[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
+                    new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng));
+                if(placesTemp[i].distance>$scope.radius) continue;
                 var marker = new google.maps.Marker({
-                    position:  new google.maps.LatLng($scope.places[i].location.lat, $scope.places[i].location.lng),
+                    position:  new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng),
                     //animation: google.maps.Animation.DROP,
                     map: map,
                     icon:image,
                     title: 'Hello World!'
                 });
+                marker.id = placesTemp[i].id;
+                marker.place = placesTemp[i];
+                google.maps.event.addListener(marker, 'click', function(marker){console.log(this) ; $scope.mapMarkerClick(this)});
                 markers.push(marker);
+                $scope.places.push(placesTemp[i]);
+
             }
             $ionicSlideBoxDelegate.enableSlide(false);//disable slider
             Places.set($scope.places);
@@ -94,6 +130,15 @@ angular.module('starter.controllers', [])
         });
 
     };
+    $scope.mapMarkerClick = function(marker2) {
+        for(var i=0;i< $scope.places.length;i++){
+            if(marker2.id == $scope.places[i].id) {$scope.clickedPlace = $scope.places[i];$scope.clickedPlace.distance = $scope.places[i].distance;}
+        }
+//        $scope.clickedPlace = marker2.place;
+//        console.log(marker2);
+        $scope.showDetails(marker2.place);
+//        $ionicSlideBoxDelegate.next();
+    };
     $scope.getPlaces(12.983662, 77.638499,'kfc');
 
     //slider code
@@ -104,8 +149,46 @@ angular.module('starter.controllers', [])
         $ionicSlideBoxDelegate.previous();
     };
     $scope.showDetails = function(place){
+        var image = 'img/marker_restaurent.png';
+        var image2 = 'img/marker1.png';
+
         $scope.clickedPlace = place;
-        console.log(place.id);
+        //console.log(place.id);
+
+        //copied from getPlaces function above
+        var placesTemp = $scope.places;
+        $scope.places=[];
+        var image = 'img/marker_restaurent.png';
+        var image2 = 'img/marker_restaurent_high.png';
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+        for(var i=0;i< placesTemp.length;i++){
+            //console.log($scope.places[i]);
+            placesTemp[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
+                new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng));
+            if(placesTemp[i].distance>$scope.radius) continue;
+            var marker = new google.maps.Marker({
+                position:  new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng),
+                //animation: google.maps.Animation.DROP,
+                map: map,
+                icon:($scope.clickedPlace.id==placesTemp[i].id)?image2:image,
+                title: 'Hello World!'
+            });
+            if($scope.clickedPlace.id==placesTemp[i].id) map.panTo(marker.position);
+            marker.id = placesTemp[i].id;
+            marker.place = placesTemp[i];
+            google.maps.event.addListener(marker, 'click', function(marker){console.log(this) ; $scope.mapMarkerClick(this)});
+            markers.push(marker);
+            $scope.places.push(placesTemp[i]);
+
+        }
+        $ionicSlideBoxDelegate.enableSlide(false);//disable slider
+        Places.set($scope.places);
+        //console.log($scope.places);
+
+
+        $ionicSlideBoxDelegate.previous();
         $ionicSlideBoxDelegate.next();
     }
 

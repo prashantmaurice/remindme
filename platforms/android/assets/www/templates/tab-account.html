@@ -4,17 +4,41 @@
             <ion-slide-box show-pager="false">
                 <ion-slide>
                     <div class="box blue">
-                        <button ng-click="nextSlide()">Next slide!</button>
-                        asdgjkasg
-                        sajdlgkhkfjs
+                        <ul class="list">
+                            <li class="item item-toggle">Access Location
+                                <label class="toggle toggle-assertive">
+                                    <input type="checkbox"><div class="track"><div class="handle"></div></div>
+                                </label>
+                            </li>
+                            <li class="item item-toggle">Access Location
+                                <label class="toggle toggle-assertive">
+                                    <input type="checkbox"><div class="track"><div class="handle"></div></div>
+                                </label>
+                            </li>
+                            <li class="item item-toggle">Access Location
+                                <label class="toggle toggle-assertive">
+                                    <input type="checkbox"><div class="track"><div class="handle"></div></div>
+                                </label>
+                            </li>
+                        </ul>
+                        <button ng-click="nextSlide()" class="button button-block button-positive" style="width:80%; margin:auto">
+                            Advanced Options
+                        </button>
                     </div>
                 </ion-slide>
                 <ion-slide>
                     <div class="box red">
-                        <button ng-click="prevSlide()">Prev slide!</button>
-                        asdgjkasg
-                        sajdlgkhkfjs
-                        Slide 2!
+                        <label class="item item-input">
+                            <span class="input-label">Username</span>
+                            <input type="text">
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">Password</span>
+                            <input type="password">
+                        </label>
+                        <button ng-click="prevSlide()" class="button button-block button-positive" style="width:80%; margin:auto">
+                            Basic Options
+                        </button>
                     </div>
                 </ion-slide>
             </ion-slide-box>

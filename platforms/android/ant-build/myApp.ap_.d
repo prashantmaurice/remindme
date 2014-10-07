@@ -39,6 +39,7 @@
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/marker_restaurent.png \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/marker_restaurent_high.png \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/marker1.png \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/ionic.png \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.ionic.keyboard \

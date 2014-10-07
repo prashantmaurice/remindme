@@ -1,1 +1,5 @@
-/* Empty. Add your own CSS if you like */
+.list_item{
+    padding:12px;/*places listview */
+    height:62px;
+    border-bottom: 1px solid #eee;
+}
