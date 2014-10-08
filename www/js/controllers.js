@@ -11,17 +11,27 @@ angular.module('starter.controllers', [])
     $scope.CLientID = 'B212RBDANHUAROAMLQDQ5RNLMXBAPHDYL52RB3ZLP3ELMJHD';
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
-    $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
+    $scope.myLatlng = new google.maps.LatLng(13.045888, 80.202697);//deafault location
     $scope.radius = 10000;
+    $scope.debug="debug";
   	$scope.initialize = function() {
 //        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
-        navigator.geolocation.getCurrentPosition(showPosition);
+        //navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                $scope.debug=position.coords.longitude;
+            },
+            function(error){
+                $scope.debug="error";
+            }, { enableHighAccuracy: true, timeout: 2*1000, maximumAge: 0 }
+        );
 
         function showPosition(position) {
 //            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
             console.log("position set to :"+position.coords.latitude+"==="+position.coords.longitude);
             $scope.myLatlng.latitude = position.coords.latitude;
             $scope.myLatlng.longitude = position.coords.longitude;
+            $scope.debug=$scope.myLatlng.longitude;
 
         }
         var mapOptions = {
@@ -139,7 +149,7 @@ angular.module('starter.controllers', [])
         $scope.showDetails(marker2.place);
 //        $ionicSlideBoxDelegate.next();
     };
-    $scope.getPlaces(12.983662, 77.638499,'kfc');
+    $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B,'kfc');
 
     //slider code
     $scope.nextSlide = function() {

@@ -3,6 +3,7 @@
 
     </div>
     <div class="bar bar-subheader" style="top:50%; height:8%">
+        <div ng-bind="debug"></div>
         <ion-scroll direction="x" style="overflow: scroll;white-space: nowrap;">
             <button ng-repeat="category in categories" style="margin-right:3px; height:100%" class="button button-small button-positive"
                     ng-click="getPlacesCurr(category.name)">
