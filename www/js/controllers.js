@@ -78,15 +78,15 @@ angular.module('starter.controllers', [])
         };
         map = new google.maps.Map(document.getElementById('map-canvas2'),mapOptions);
         var image = 'img/marker1.png';
-//        var marker_mylocation = new google.maps.Marker({
-//            position: $scope.myLatlng,
-//            map: map,
-//            draggable:true,
-//            icon: image,
-//            animation: google.maps.Animation.DROP,
-//            title: 'Hello World!'
-//        });
-//        google.maps.event.addListener(marker_mylocation, 'click', toggleBounce);
+        var marker_mylocation = new google.maps.Marker({
+            position: $scope.myLatlng,
+            map: map,
+            draggable:true,
+            icon: image,
+            animation: google.maps.Animation.DROP,
+            title: 'Hello World!'
+        });
+        google.maps.event.addListener(marker_mylocation, 'click', toggleBounce);
 
         var populationOptions = {
             strokeColor: '#3399FF',
@@ -95,18 +95,19 @@ angular.module('starter.controllers', [])
             fillColor: '#3399FF',
             fillOpacity: 0.1,
             map: map,
-            icon: {
-                url: "https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png",
-                size: new google.maps.Size(7, 7),
-                anchor: new google.maps.Point(4, 4)
-            },
-            center: $scope.myLatlng,
+//            icon: {
+//                url: "img/location_pin.png",
+//                size: new google.maps.Size(700, 700),
+//                anchor: new google.maps.Point(40, 40)
+//            },
+            //center: $scope.myLatlng,
             editable : true,
             radius: $scope.radius
         };
         // Add the circle for this city to the map.
         var cityCircle = new google.maps.Circle(populationOptions);
-        google.maps.event.addListener(cityCircle, 'center_changed', reDrawMarkers );
+        cityCircle.bindTo('center', marker_mylocation, 'position');
+        google.maps.event.addListener(marker_mylocation, 'dragend', reDrawMarkers );
         google.maps.event.addListener(cityCircle, 'radius_changed', reDrawMarkers);
 
         function toggleBounce() {
@@ -119,11 +120,13 @@ angular.module('starter.controllers', [])
         function reDrawMarkers(){
 //            console.log(cityCircle.radius);
             //marker_mylocation.getPosition()
-            map.setCenter(cityCircle.center);
-//            console.log(marker_mylocation.position);
+//            map.setCenter(marker_mylocation.position);
+            console.log(marker_mylocation.position);
+//            console.log(cityCircle);
             $scope.myLatlng  = cityCircle.center;
             $scope.radius = cityCircle.radius;
-            $scope.getPlaces(cityCircle.center.k,cityCircle.center.B,$scope.currQuery);
+
+            $scope.getPlaces(marker_mylocation.position.k,marker_mylocation.position.B,$scope.currQuery);
             //removeMarkers();
         }
         function removeMarkers(){
@@ -146,6 +149,7 @@ angular.module('starter.controllers', [])
         console.log("API:"+$scope.api+'&ll='+lat+','+long+'&query='+query+'');
         $http.get($scope.api+'&ll='+lat+','+long+'&query='+query+'').then(function(resp) {
             //$scope. = resp.data.conditions
+
             var placesTemp = resp.data.response.venues;
             $scope.places=[];
             var image = 'img/marker_restaurent.png';
@@ -154,9 +158,11 @@ angular.module('starter.controllers', [])
                 markers[i].setMap(null);
             }
             for(var i=0;i< placesTemp.length;i++){
-                //console.log($scope.places[i]);
-                placesTemp[i].distance=google.maps.geometry.spherical.computeDistanceBetween ($scope.myLatlng,
+                placesTemp[i].distance=google.maps.geometry.spherical.computeDistanceBetween (
+                      new google.maps.LatLng(lat, long),
                     new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng));
+//                placesTemp[i].distance=234;
+
                 if(placesTemp[i].distance>$scope.radius) continue;
                 var marker = new google.maps.Marker({
                     position:  new google.maps.LatLng(placesTemp[i].location.lat, placesTemp[i].location.lng),
@@ -165,6 +171,7 @@ angular.module('starter.controllers', [])
                     icon:image,
                     title: 'Hello World!'
                 });
+
                 marker.id = placesTemp[i].id;
                 marker.place = placesTemp[i];
                 google.maps.event.addListener(marker, 'click', function(marker){console.log(this) ; $scope.mapMarkerClick(this)});

@@ -10,14 +10,14 @@
                     "name":"Blue Cash Everyday",
                     "cashback": 3,
                     "rewards" : 0,
-                    "categories" : ["supermarkets", "petrol"]
+                    "categories" : ["supermarkets", "petrol","KFC"]
                 },
                 {
                     "id" : 2,
                     "name":"Everyday Credit card",
                     "cashback":0,
                     "rewards" : 2,
-                    "categories" : ["supermarkets"]
+                    "categories" : ["supermarkets","KFC"]
                 }
             ],
             "selected":true
@@ -32,14 +32,14 @@
                     "name":"Thank you preferred card",
                     "cashback": 0,
                     "rewards" : 1,
-                    "categories" : ["supermarkets"]
+                    "categories" : ["supermarkets","KFC"]
                 },
                 {
                     "id" : 2,
                     "name":"CitiBusiness ThankYou Card",
                     "cashback": 0,
                     "rewards" : 3,
-                    "categories" : ["supermarkets"]
+                    "categories" : ["supermarkets","KFC"]
                 }
             ],
             "selected":true
@@ -54,14 +54,14 @@
                     "name":"Quicksilver Cash Rewards",
                     "cashback": 0,
                     "rewards" : 2,
-                    "categories" : ["supermarkets"]
+                    "categories" : ["supermarkets","KFC"]
                 },
                 {
                     "id" : 2,
                     "name":"Spark Cash",
                     "cashback": 1,
                     "rewards" : 0,
-                    "categories" : ["supermarkets"]
+                    "categories" : ["supermarkets","KFC"]
                 }
             ],
             "selected":true
