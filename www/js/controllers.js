@@ -32,7 +32,7 @@ angular.module('starter.controllers', [])
         };
 })
 
-.controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate) {
+.controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate,$ionicLoading ) {
   	$scope.categories = Places.categories();
     $scope.currQuery = "petrol";
     $scope.CLientID = 'B212RBDANHUAROAMLQDQ5RNLMXBAPHDYL52RB3ZLP3ELMJHD';
@@ -147,7 +147,16 @@ angular.module('starter.controllers', [])
 
         $scope.currQuery = query;
         console.log("API:"+$scope.api+'&ll='+lat+','+long+'&query='+query+'');
+        $scope.loadingIndicator = $ionicLoading.show({
+            content: 'Showing Loading Indicator!',
+            template: '<i class="ion-looping"></i>',
+            animation: 'fade-in',
+            showBackdrop: false,
+            maxWidth: 200,
+            showDelay: 10
+        });
         $http.get($scope.api+'&ll='+lat+','+long+'&query='+query+'').then(function(resp) {
+            $ionicLoading.hide();
             //$scope. = resp.data.conditions
 
             var placesTemp = resp.data.response.venues;
