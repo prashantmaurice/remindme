@@ -58,23 +58,60 @@ services.factory('Places', function() {
   }
 });
 
-services.factory('Cards', function() {
+services.factory('Cards', function($http) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
+
   var cards = [
-    {name:'American Extress',country:'Norway',selected:true},
-    {name:'CitiBank',country:'Sweden',selected:false},
-    {name:'Chase',country:'Denmark',selected:false}
+    {
+        id:1,
+        name:'American Express',
+        country:'Norway',
+        types:[
+            {
+                name:'Blue Cash Everyday',
+                cashback: 3,
+                rewards : 0,
+                category : 'supermarkets'
+            },
+            {
+                name:'Everyday Credit card',
+                cashback:0,
+                rewards : 2,
+                category : 'supermarkets'
+            }
+        ],
+        selected:true
+    }
   ];
+
+    var wallet = [
+        {
+            id:1,
+            name:'American Express',
+            country:'Norway',
+            type:'Blue Cash Everyday',
+            typeId : 1,
+            selected : true
+        }
+     ];
+
 
   return {
     all: function() {
       return cards;
     },
+    wallet: function() {
+      return wallet;
+    },
     get: function(cardId) {
       // Simple index lookup
       return cards[cardId];
+    },
+    importCards:function(scope){
+          var promise = $http.get('cards.json');
+        return promise;
     }
   }
 });

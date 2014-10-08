@@ -1,5 +1,29 @@
-.list_item{
-    padding:12px;/*places listview */
-    height:62px;
+.list_item {
+    padding: 12px; /*places listview */
+    height: 62px;
     border-bottom: 1px solid #eee;
+}
+/*overload fonts*/
+h1, h2, h3, h4, h5, h6, .col, .bar{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/*----new cards grip ----*/
+.grid50_cont{
+    /*width:40%;*/
+    background-color: #4db6ac;
+    width: 48%;
+    margin: 1%;
+    display: inline-block;
+    height:0;
+    color:#fff;
+    font-weight: 900;
+    text-align: center;
+    padding-bottom: 30%;
+    padding-top: 20%;
+}
+.grid50{
+    width:90%;
+    height: 90%;
+    margin:5%;
 }

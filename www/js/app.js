@@ -47,7 +47,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
+      .state('tab.addcards', {
+          url: '/cards/add',
+          views: {
+              'tab-cards': {
+                  templateUrl: 'templates/tab-addcards.html',
+                  controller: 'CardsCtrl'
+              }
+          }
+      })
+      .state('tab.addcardstypes', {
+          url: '/cards/add/:type',
+          views: {
+              'tab-cards': {
+                  templateUrl: 'templates/tab-addcards-types.html',
+                  controller: 'CardsCtrl'
+              }
+          }
+      })
     .state('tab.places', {
       url: '/places',
       views: {

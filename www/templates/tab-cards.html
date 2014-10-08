@@ -1,17 +1,24 @@
 <ion-view title="Available Cards">
   <ion-content class="padding">
-    <div class="card"  ng-repeat="card in cards">
+    <span ng-bind="cards">as</span>
+    <div class="card"  ng-repeat="card in wallet">
 	  <div class="item item-text-wrap">
 	  	<div class="row">
-		  <div class="col col-90">{{card.name}}</div>
 		  <div class="col">
+              <span style="font-size: 1.2em; color:#000">{{card.name}}</span><br>
+              <span style="font-size: 0.8em; color:#333">{{card.type}}</span>
+          </div>
+		  <div class="col col-10">
 		    <label class="checkbox">
-		       <input type="checkbox" ng-click="card.selected=!card.selected" ng-checked="card.selected" 
+		       <input type="checkbox" ng-click="card.selected=!card.selected" ng-checked="card.selected"
 		       ng-model="card.selected">
 		    </label>
 		  </div>
 		</div>
 	  </div>
 	</div>
+    <a  href="#/tab/cards/add" class="button button-block button-positive" style="width:80%; margin:auto">
+      Add Cards
+    </a>
   </ion-content>
 </ion-view>

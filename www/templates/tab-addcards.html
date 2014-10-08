@@ -1,0 +1,16 @@
+<ion-view title="Select a card type">
+  <ion-content class="" scroll="false">
+      <div style="width: 100%; padding: 1%">
+          <a class="button button-block button-positive icon-right ion-chevron-right"
+             href="#/tab/cards/add/{{card.id}}" ng-repeat="card in cards">
+              {{card.name}}
+          </a>
+
+          <!--<a href="#/tab/cards/add/2354" ng-repeat="card in cards">-->
+        <!--<div class="grid50_cont" >-->
+            <!--<div class="grid50">{{card.name}}</div>-->
+        <!--</div>-->
+              <!--</a>-->
+      </div>
+  </ion-content>
+</ion-view>

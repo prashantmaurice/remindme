@@ -1,8 +1,48 @@
 angular.module('starter.controllers', [])
 
 
-.controller('CardsCtrl', function($scope, Cards) {
-	$scope.cards = Cards.all();
+.controller('CardsCtrl', function($scope, Cards,$stateParams) {
+    $scope.getDataCards = function() {
+        var promise = Cards.importCards();
+        promise.then(function(data){
+            $scope.cards = data.data.data;
+            console.log(data.data.data);
+
+        });
+        console.log("result:"+Cards.importCards());
+    };
+    if($scope.cards==null)
+        $scope.getDataCards();
+
+//    console.log("result:"+Cards.importCards());
+    $scope.wallet = Cards.wallet();
+        $scope.type = $stateParams.type;
+        $scope.isActive = function(card) {
+            return card.id.toString() === $scope.type;
+        };
+        $scope.activate = function(cardtype , card) {
+            console.log(card.toString);
+            $scope.wallet.push({
+                id:1,
+                name:'American Extress',
+                country:'Norway',
+                type:'Blue Cash Everyday',
+                typeId : 1,
+                selected : true
+            });
+            var backView = $scope.$viewHistory.views[$scope.$viewHistory.backView.backViewId];
+            $scope.$viewHistory.forcedNav = {
+                viewId:     backView.viewId,
+                navAction: 'moveBack',
+                navDirection: 'back'
+            };
+            backView && backView.go();
+        };
+
+
+})
+.controller('AddCardsCtrl', function($scope,$stateParams,$ionicViewService) {
+        $
 })
 
 .controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate) {
@@ -12,7 +52,7 @@ angular.module('starter.controllers', [])
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
     $scope.myLatlng = new google.maps.LatLng(13.057605, 80.228280);//default chennai
-    $scope.radius = 10000;
+    $scope.radius = 5000;
 
     //get position
 
@@ -123,7 +163,7 @@ angular.module('starter.controllers', [])
             $scope.places=[];
             var image = 'img/marker_restaurent.png';
             var image2 = 'img/marker1.png';
-            for (var i = 0; i < markers.leinitializength; i++) {
+            for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(null);
             }
             for(var i=0;i< placesTemp.length;i++){

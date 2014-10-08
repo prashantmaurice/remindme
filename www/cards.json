@@ -1,0 +1,24 @@
+{
+    "data" : [
+        {
+            "id":1,
+            "name":"American Express",
+            "country":"Norway",
+            "types":[
+                {
+                    "name":"Blue Cash Everyday",
+                    "cashback": 3,
+                    "rewards" : 0,
+                    "category" : "supermarkets"
+                },
+                {
+                    "name":"Everyday Credit card",
+                    "cashback":0,
+                    "rewards" : 2,
+                    "category" : "supermarkets"
+                }
+            ],
+            "selected":true
+        }
+    ]
+}
