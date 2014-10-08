@@ -52,7 +52,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           views: {
               'tab-cards': {
                   templateUrl: 'templates/tab-addcards.html',
-                  controller: 'CardsCtrl'
+                  controller: 'AddCardsCtrl'
               }
           }
       })
@@ -61,7 +61,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           views: {
               'tab-cards': {
                   templateUrl: 'templates/tab-addcards-types.html',
-                  controller: 'CardsCtrl'
+                  controller: 'AddCardsCtrl'
               }
           }
       })

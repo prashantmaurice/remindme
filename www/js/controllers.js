@@ -1,9 +1,12 @@
 angular.module('starter.controllers', [])
 
 
-.controller('CardsCtrl', function($scope, Cards,$stateParams) {
-    $scope.cards = Cards.allCard();
+.controller('CardsCtrl', function($scope, Cards) {
     $scope.wallet = Cards.wallet();
+})
+.controller('AddCardsCtrl', function($scope,Cards,$stateParams) {
+        $scope.wallet = Cards.wallet();
+        $scope.cards = Cards.allCard();
         $scope.type = $stateParams.type;
         $scope.isActive = function(card) {
             return card.id.toString() === $scope.type;
@@ -16,6 +19,7 @@ angular.module('starter.controllers', [])
                 country:card.country,
                 type:cardtype.name,
                 typeId : cardtype.id,
+                categories : cardtype.categories,
                 selected : true
             });
             var backView = $scope.$viewHistory.views[$scope.$viewHistory.backView.backViewId];
@@ -26,11 +30,6 @@ angular.module('starter.controllers', [])
             };
             backView && backView.go();
         };
-
-
-})
-.controller('AddCardsCtrl', function($scope,$stateParams,$ionicViewService) {
-        $
 })
 
 .controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate) {

@@ -10,14 +10,58 @@
                     "name":"Blue Cash Everyday",
                     "cashback": 3,
                     "rewards" : 0,
-                    "category" : "supermarkets"
+                    "categories" : ["supermarkets", "petrol"]
                 },
                 {
                     "id" : 2,
                     "name":"Everyday Credit card",
                     "cashback":0,
                     "rewards" : 2,
-                    "category" : "supermarkets"
+                    "categories" : ["supermarkets"]
+                }
+            ],
+            "selected":true
+        },
+        {
+            "id":2,
+            "name":"Citibank",
+            "country":"Norway",
+            "types":[
+                {
+                    "id" : 1,
+                    "name":"Thank you preferred card",
+                    "cashback": 0,
+                    "rewards" : 1,
+                    "categories" : ["supermarkets"]
+                },
+                {
+                    "id" : 2,
+                    "name":"CitiBusiness ThankYou Card",
+                    "cashback": 0,
+                    "rewards" : 3,
+                    "categories" : ["supermarkets"]
+                }
+            ],
+            "selected":true
+        },
+        {
+            "id": 3,
+            "name":"CapitalOne",
+            "country":"Norway",
+            "types":[
+                {
+                    "id" : 1,
+                    "name":"Quicksilver Cash Rewards",
+                    "cashback": 0,
+                    "rewards" : 2,
+                    "categories" : ["supermarkets"]
+                },
+                {
+                    "id" : 2,
+                    "name":"Spark Cash",
+                    "cashback": 1,
+                    "rewards" : 0,
+                    "categories" : ["supermarkets"]
                 }
             ],
             "selected":true

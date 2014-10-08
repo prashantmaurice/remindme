@@ -78,6 +78,7 @@ services.factory('Cards', function($http) {
             country:'Norway',
             type:'Blue Cash Everyday',
             typeId : 1,
+            categories : ["petrol"],
             selected : true
         }
      ];
