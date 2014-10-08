@@ -4,7 +4,9 @@
     </div>
     <div class="bar bar-subheader" style="top:50%; height:8%">
         <ion-scroll direction="x" style="overflow: scroll;white-space: nowrap;">
-            <button ng-repeat="category in categories" style="margin-right:3px; height:100%" class="button button-small button-positive"
+            <button ng-repeat="category in categories" style="margin-right:3px; height:100%"
+                    ng-class="{'button-positive': (category.name!==currQuery),'button-assertive': category.name===currQuery}"
+                    class="button button-small"
                     ng-click="getPlacesCurr(category.name)">
                 {{category.name}}
             </button>

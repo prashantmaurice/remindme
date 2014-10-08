@@ -136,7 +136,7 @@ angular.module('starter.controllers', [])
         }
 
         //last initialize
-        $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B,'kfc');
+        $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B,'KFC');
 
   	};
     var markers = [];
