@@ -6,12 +6,14 @@
             "country":"Norway",
             "types":[
                 {
+                    "id" : 1,
                     "name":"Blue Cash Everyday",
                     "cashback": 3,
                     "rewards" : 0,
                     "category" : "supermarkets"
                 },
                 {
+                    "id" : 2,
                     "name":"Everyday Credit card",
                     "cashback":0,
                     "rewards" : 2,

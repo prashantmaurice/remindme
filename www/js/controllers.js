@@ -2,19 +2,7 @@ angular.module('starter.controllers', [])
 
 
 .controller('CardsCtrl', function($scope, Cards,$stateParams) {
-    $scope.getDataCards = function() {
-        var promise = Cards.importCards();
-        promise.then(function(data){
-            $scope.cards = data.data.data;
-            console.log(data.data.data);
-
-        });
-        console.log("result:"+Cards.importCards());
-    };
-    if($scope.cards==null)
-        $scope.getDataCards();
-
-//    console.log("result:"+Cards.importCards());
+    $scope.cards = Cards.allCard();
     $scope.wallet = Cards.wallet();
         $scope.type = $stateParams.type;
         $scope.isActive = function(card) {
@@ -23,11 +11,11 @@ angular.module('starter.controllers', [])
         $scope.activate = function(cardtype , card) {
             console.log(card.toString);
             $scope.wallet.push({
-                id:1,
-                name:'American Extress',
-                country:'Norway',
-                type:'Blue Cash Everyday',
-                typeId : 1,
+                id: card.id,
+                name: card.name,
+                country:card.country,
+                type:cardtype.name,
+                typeId : cardtype.id,
                 selected : true
             });
             var backView = $scope.$viewHistory.views[$scope.$viewHistory.backView.backViewId];

@@ -59,33 +59,18 @@ services.factory('Places', function() {
 });
 
 services.factory('Cards', function($http) {
-  // Might use a resource here that returns a JSON array
+    // Some fake testing data
+    //TODO:get this data from server or local storage
+    var cards = [];
+    //get data from file(or cloud)
+    var promise = $http.get('cards.json');
+    promise.then(function(data){
+        cards = data.data.data;
+        console.log("successfully imported cards from storage:"+data.data.data);
+    });
 
-  // Some fake testing data
 
-  var cards = [
-    {
-        id:1,
-        name:'American Express',
-        country:'Norway',
-        types:[
-            {
-                name:'Blue Cash Everyday',
-                cashback: 3,
-                rewards : 0,
-                category : 'supermarkets'
-            },
-            {
-                name:'Everyday Credit card',
-                cashback:0,
-                rewards : 2,
-                category : 'supermarkets'
-            }
-        ],
-        selected:true
-    }
-  ];
-
+    //TODO:make this wallet load data from local storage
     var wallet = [
         {
             id:1,
@@ -99,7 +84,7 @@ services.factory('Cards', function($http) {
 
 
   return {
-    all: function() {
+    allCard: function() {
       return cards;
     },
     wallet: function() {
@@ -108,10 +93,6 @@ services.factory('Cards', function($http) {
     get: function(cardId) {
       // Simple index lookup
       return cards[cardId];
-    },
-    importCards:function(scope){
-          var promise = $http.get('cards.json');
-        return promise;
     }
   }
 });
