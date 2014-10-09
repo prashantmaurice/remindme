@@ -330,11 +330,13 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('PlacesDetailCtrl', function($scope, $stateParams, Places) {
+.controller('PlacesDetailCtrl', function($scope, Cards,$stateParams, Places) {
         console.log($stateParams.friendId);
         console.log(Places.getall());
         console.log(Places.get($stateParams.friendId));
     $scope.place = Places.get($stateParams.friendId);
+        $scope.wallet = Cards.wallet();
+        $scope.cards = Cards.allCard();
     $scope.goBack = function() {
         alert('working');
         $ionicNavBarDelegate.back();

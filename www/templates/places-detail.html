@@ -20,5 +20,25 @@
             </a>
 
         </div>
+
+        <span>Optimum card for Maximum Rewards</span>
+        <div class="list card">
+            <div class="item item-avatar">
+                <h2>{{wallet[place.rewardCardNum].name}}</h2>
+                <h4>{{wallet[place.rewardCardNum].type}}</h4>
+                rewards : {{place.rewards}}X
+            </div>
+
+        </div>
+
+        <span>Optimum card for Maximum CashBack</span>
+        <div class="list card">
+            <div class="item item-avatar">
+                <h2>{{wallet[place.cashbackCardNum].name}}</h2>
+                <h4>{{wallet[place.cashbackCardNum].type}}</h4>
+                rewards : {{place.cashback}}%
+            </div>
+
+        </div>
     </ion-content>
 </ion-view>
