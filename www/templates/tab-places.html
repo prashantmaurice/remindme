@@ -23,11 +23,11 @@
                         <div class="list_item" ng-repeat="place in places | orderBy:'distance'" type="item-text-wrap"  ng-click="showDetails(place)" >
                             <span style="font-size: 1.2em;">{{place.name}}</span>
                             <span style="font-size: 0.8em;color:#777;">{{(place.distance/1000).toFixed(2);}}km</span>
-                            <span style="font-size: 0.8em;color:#777; float:right">{{wallet[place.cashbackCardNum].name}} cashback : {{place.cashback}}%</span>
+                            <span style="font-size: 0.6em;color:#777; float:right">{{wallet[place.cashbackCardNum].name}} cashback : {{place.cashback}}%</span>
                             <br>
 
                             <span style="font-size: 0.8em;color:#777">{{place.location.address}}</span>
-                            <span style="font-size: 0.8em;color:#777; float:right">{{wallet[place.rewardCardNum].name}} rewards : {{place.rewards}}X</span>
+                            <span style="font-size: 0.6em;color:#777; float:right">{{wallet[place.rewardCardNum].name}} rewards : {{place.rewards}}X</span>
                                   <!--<button class="button button-small button-assertive">{{wallet[place.cashbackCardNum].name}} cashback : {{place.cashback}}%</button>-->
                                   <!--<button class="button button-small button-assertive">rewards : {{place.rewards}}X</button>-->
                                   <!--<button class="button button-small button-assertive">{{(place.distance/1000).toFixed(2);}}km</button>-->

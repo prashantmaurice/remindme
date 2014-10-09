@@ -27,3 +27,28 @@ h1, h2, h3, h4, h5, h6, .col, .bar{
     height: 90%;
     margin:5%;
 }
+.bar.bar-header{
+    border: 0;
+    background-color: #465568;
+}
+.title{
+    font-weight: 600;
+}
+.color-Main{
+    background-color: #465568;
+}
+.item{
+    border-left: 6px solid #F07064;
+}
+.bar{
+    padding:0px;
+}
+.tabs-striped .tabs{
+    background-color: #212e3d;
+}
+.tabs-striped.tabs-color-light .tab-item.tab-item-active, .tabs-striped.tabs-color-light .tab-item.active, .tabs-striped.tabs-color-light .tab-item.activated {
+    margin-top: -2px;
+    color: #fff;
+    border: 0 solid #F07064;
+    border-top-width: 3px;
+}
