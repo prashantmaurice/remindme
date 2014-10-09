@@ -5,34 +5,58 @@ angular.module('starter.controllers', [])
 	$scope.cards = Cards.all();
 })
 
-.controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate) {
+.controller('PlacesCtrl', function($scope, Places, $http, $ionicSlideBoxDelegate,$ionicLoading) {
   	$scope.categories = Places.categories();
     $scope.currQuery = "petrol";
     $scope.CLientID = 'B212RBDANHUAROAMLQDQ5RNLMXBAPHDYL52RB3ZLP3ELMJHD';
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
+//    $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
     $scope.myLatlng = new google.maps.LatLng(13.057605, 80.228280);//default chennai
     $scope.radius = 10000;
+        $scope.debug = "debug";
+        $scope.debug2 =(navigator.geolocation.toString());
 
-    //get position
+    $scope.initialize = function($ionicLoading) {
+        //        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
+                $scope.show = function() {
+                    $ionicLoading.show({
+                        template: 'cOULD NOT LOAD...'
+                    });
+                };
+                $scope.debug = "asked";
+
+                function onError() {
+                    $scope.debug = "error";
+//                    $ionicLoading.hide();
+                }
+                function showPosition(position) {
+                    $scope.debug = "position";
+//                    $ionicLoading.hide();
+                    //get position
 
 
-
-
-    $scope.initialize = function(){
-        $scope.showPosition = function (position) {
+                    //   $scope.initialize = function(){
+                    //      $scope.showPosition = function (position) {
 //            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
-            console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
-            $scope.myLatlng.k = position.coords.latitude;
-            $scope.myLatlng.B = position.coords.longitude;
-            console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
-            $scope.initialize2();
-//
-        };
-        navigator.geolocation.getCurrentPosition($scope.showPosition);
+                    console.log("position set to :" + position.coords.latitude + "===" + position.coords.longitude);
+                    $scope.myLatlng.latitude = position.coords.latitude;
+                    $scope.myLatlng.longitude = position.coords.longitude;
+//            console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//            $scope.myLatlng.k = position.coords.latitude;
+//            $scope.myLatlng.B = position.coords.longitude;
+//            console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//            $scope.initialize2();
+////
+//        };
+//        navigator.geolocation.getCurrentPosition($scope.showPosition);
     };
 
-  	$scope.initialize2 = function() {
+        navigator.geolocation.watchPosition(showPosition,onError, { frequency: 3000 });
+//        navigator.geolocation.getCurrentPosition(showPosition,onError,{maximumAge:5000, timeout:500000, enableHighAccuracy:true});
+//    };
+
+//  	$scope.initialize2 = function() {
 //        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
 //        navigator.geolocation.getCurrentPosition(showPosition);
 

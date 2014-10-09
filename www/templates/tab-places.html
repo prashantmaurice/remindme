@@ -2,8 +2,12 @@
     <div class="bar bar-header" style="height:50%;width: 100%;"><div id="map-canvas2" style="height:100%;width: 100%;"></div>
 
     </div>
+
     <div class="bar bar-subheader" style="top:50%; height:8%">
         <ion-scroll direction="x" style="overflow: scroll;white-space: nowrap;">
+            <button ng-bind="debug"></button>
+            <button ng-bind="debug2"></button>
+
             <button ng-repeat="category in categories" style="margin-right:3px; height:100%" class="button button-small button-positive"
                     ng-click="getPlacesCurr(category.name)">
                 {{category.name}}
