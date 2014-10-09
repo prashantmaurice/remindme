@@ -36,9 +36,11 @@
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/cordova_plugins.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/css \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/cards.json \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/marker_restaurent.png \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/location_pin.png \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/marker_restaurent_high.png \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/marker1.png \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/img/ionic.png \
@@ -118,11 +120,14 @@
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic/js/angular-ui/angular-ui-router.min.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic/js/angular-ui/angular-ui-router.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/places-detail.html \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-addcards.html \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tabs.html \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-cards.html \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-addcards-types.html \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-places.html \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/templates/tab-account.html \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js/app.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js/services.js \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js/custom.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/js/controllers.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/ant-build/AndroidManifest.xml \

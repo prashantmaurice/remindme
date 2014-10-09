@@ -1,0 +1,23 @@
+<ion-view title="Select a card type">
+  <ion-content class="" scroll="false" style="background-color: #fff;">
+      <div style="width: 100%; padding: 1%">
+        <div class="" ng-repeat="card in cards | filter:isActive">
+            <div class="list card" ng-repeat="type in card.types">
+                <div class="item item-avatar">
+                    <div class="row">
+                        <div class="col">
+                            <h2>{{type.name}}</h2>
+                            <p>cashback : {{type.cashback}}% <br>rewards : {{type.rewards}}X</p>
+                        </div>
+                        <div class="col-15">
+                            <button class="button button-positive" ng-click="activate(type, card)">
+                                <i class="icon ion-plus"></i>  ADD
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>

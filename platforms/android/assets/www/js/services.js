@@ -58,19 +58,60 @@ services.factory('Places', function() {
   }
 });
 
-services.factory('Cards', function() {
-  // Might use a resource here that returns a JSON array
+services.factory('Cards', function($http) {
+    // Some fake testing data
+    //TODO:get this data from server or local storage
+    var cards = [//dummy data //TODO:remove this bit and make sure ur code runs only after import
+        {
+            "id":1,
+            "name":"American Express",
+            "country":"Norway",
+            "types":[
+                {
+                    "id" : 1,
+                    "name":"Blue Cash Everyday",
+                    "cashback": 3,
+                    "rewards" : 0,
+                    "categories" : ["supermarkets", "petrol","KFC"]
+                },
+                {
+                    "id" : 2,
+                    "name":"Everyday Credit card",
+                    "cashback":0,
+                    "rewards" : 2,
+                    "categories" : ["supermarkets","KFC"]
+                }
+            ],
+            "selected":true
+        }];
+    //get data from file(or cloud)
+    var promise = $http.get('cards.json');
+    promise.then(function(data){
+        cards = data.data.data;
+        console.log("successfully imported cards from storage:"+data.data.data);
+    });
 
-  // Some fake testing data
-  var cards = [
-    {name:'American Extress',country:'Norway',selected:true},
-    {name:'CitiBank',country:'Sweden',selected:false},
-    {name:'Chase',country:'Denmark',selected:false}
-  ];
+
+    //TODO:make this wallet load data from local storage
+    var wallet = [
+        {
+            id:1,
+            name:'American Express',
+            country:'Norway',
+            type:'Blue Cash Everyday',
+            typeId : 1,
+            categories : ["petrol","KFC"],
+            selected : true
+        }
+     ];
+
 
   return {
-    all: function() {
+    allCard: function() {
       return cards;
+    },
+    wallet: function() {
+      return wallet;
     },
     get: function(cardId) {
       // Simple index lookup

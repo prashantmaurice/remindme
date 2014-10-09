@@ -56,10 +56,10 @@ angular.module('starter.controllers', [])
             $scope.myLatlng.k = position.coords.latitude;
             $scope.myLatlng.B = position.coords.longitude;
             console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
-            $scope.initialize2();
+
 //
         };
-        navigator.geolocation.getCurrentPosition($scope.showPosition);
+        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2() ,{ timeout: 300 });
     };
 
   	$scope.initialize2 = function() {
