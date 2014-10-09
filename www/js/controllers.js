@@ -3,6 +3,7 @@ angular.module('starter.controllers', [])
 
 .controller('CardsCtrl', function($scope, Cards) {
     $scope.wallet = Cards.wallet();
+    console.log("TEST:"+Cards.allCard());
 })
 .controller('AddCardsCtrl', function($scope,Cards,$stateParams) {
         $scope.wallet = Cards.wallet();
@@ -41,6 +42,7 @@ angular.module('starter.controllers', [])
     $scope.myLatlng = new google.maps.LatLng(13.057605, 80.228280);//default chennai
     $scope.radius = 5000;
     $scope.wallet = Cards.wallet();
+    $scope.cards = Cards.allCard();
 
     //get position
 
@@ -153,11 +155,7 @@ angular.module('starter.controllers', [])
         });
         $http.get($scope.api+'&ll='+$scope.myLatlng.k+','+$scope.myLatlng.B+'&query='+query+'').then(function(resp) {
             $ionicLoading.hide();
-            //$scope. = resp.data.conditions
-
             $scope.populateMap($scope.myLatlng.k,$scope.myLatlng.B,query,resp,null);
-
-
         }, function(err) {
             console.error('ERR', err);
             // err.status will contain the status code
@@ -219,7 +217,8 @@ angular.module('starter.controllers', [])
                 title: 'Hello World!'
             });
 
-
+            placesTemp[i].category = $scope.currQuery;
+            $scope.evaluateDiscounts(placesTemp[i])
             marker.id = placesTemp[i].id;
             marker.place = placesTemp[i];
             google.maps.event.addListener(marker, 'click', function(marker){console.log(this) ; $scope.mapMarkerClick(this)});
@@ -234,6 +233,47 @@ angular.module('starter.controllers', [])
         console.log($scope.places);
 
     };
+    $scope.evaluateDiscounts = function(place) {
+        var category = place.category;
+        var wallet = $scope.wallet;
+        for(var i=0; i<wallet.length;i++){
+            var categoriesAvailable = wallet[i].categories;
+            for(var j=0; j<categoriesAvailable.length;j++){
+                if(categoriesAvailable[j]==category){
+                    console.log('MATCH:'+category+"=="+wallet[i].id+"=="+wallet[i].typeId);
+                    var cardFound = $scope.getType(wallet[i].id, wallet[i].typeId);
+                    if(place.rewards!=null) {
+                        if (place.rewards < cardFound.rewards){
+                            place.rewards = cardFound.rewards;
+                            place.rewardCardNum = i;
+                        }
+                    }else {place.rewards = cardFound.rewards;place.rewardCardNum = i;}
+
+                    if(place.cashback!=null) {
+                        if (place.cashback < cardFound.cashback)
+                        {place.cashback = cardFound.cashback;
+                            place.cashbackCardNum = i;}
+                    }else {place.cashback = cardFound.cashback;place.cashbackCardNum = i;}
+                }
+            }
+        }
+    };
+    $scope.getType =  function(cardId,cardTypeId) {
+        // Simple index lookup
+        console.log('BAKE:'+$scope.cards.length);
+        for(var i=0;i<$scope.cards.length;i++){
+            console.log('hook1');
+            if(cardId==$scope.cards[i].id){
+                for(var j=0;j<$scope.cards[i].types.length;j++){
+                    console.log("CALL1:"+cardTypeId+"=="+$scope.cards[i].types[j].id);
+                    if(cardTypeId==$scope.cards[i].types[j].id){
+                        return $scope.cards[i].types[j];
+                    }
+                }
+            }
+        }
+        return null;
+    }
     //slider code
     $scope.nextSlide = function() {
         $ionicSlideBoxDelegate.next();

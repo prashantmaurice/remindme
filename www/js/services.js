@@ -61,7 +61,29 @@ services.factory('Places', function() {
 services.factory('Cards', function($http) {
     // Some fake testing data
     //TODO:get this data from server or local storage
-    var cards = [];
+    var cards = [//dummy data //TODO:remove this bit and make sure ur code runs only after import
+        {
+            "id":1,
+            "name":"American Express",
+            "country":"Norway",
+            "types":[
+                {
+                    "id" : 1,
+                    "name":"Blue Cash Everyday",
+                    "cashback": 3,
+                    "rewards" : 0,
+                    "categories" : ["supermarkets", "petrol","KFC"]
+                },
+                {
+                    "id" : 2,
+                    "name":"Everyday Credit card",
+                    "cashback":0,
+                    "rewards" : 2,
+                    "categories" : ["supermarkets","KFC"]
+                }
+            ],
+            "selected":true
+        }];
     //get data from file(or cloud)
     var promise = $http.get('cards.json');
     promise.then(function(data){
@@ -78,7 +100,7 @@ services.factory('Cards', function($http) {
             country:'Norway',
             type:'Blue Cash Everyday',
             typeId : 1,
-            categories : ["petrol"],
+            categories : ["petrol","KFC"],
             selected : true
         }
      ];
