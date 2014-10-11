@@ -28,10 +28,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 //          location.lat = location2.getLon();
           navigator.mobileDebug.say(location2)
       };
-      cordova.exec(call(location), function (err) {
+      cordova.exec(function(data){navigator.mobileDebug.say("DATA:"+JSON.stringify(data))}, function (err) {
           callback('Nothing to echo.');
           navigator.mobileDebug.say("ERROR")
-      }, "LocationPlugin", "location", [location]);
+      }, "Device", "getDeviceInfo", [location]);
 
     }
 
