@@ -24,8 +24,8 @@ cordova.define("org.apache.cordova.plugin.helloworld.helloworld", function(requi
  * @constructor
  */
 var helloworld = {
-    say: function() {
-	alert("helloworld");
+    say: function(text) {
+	alert("helloworld2"+text);
     }
 };
 

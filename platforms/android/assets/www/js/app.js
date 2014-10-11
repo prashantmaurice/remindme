@@ -18,8 +18,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+      var call = function(){navigator.helloworld.say("BAH")}
+      cordova.exec(call(), function(err) {
+              callback('Nothing to echo.');
+          },"Echo", "echo", [str]);
 
-      navigator.helloworld.say();
   });
 })
 

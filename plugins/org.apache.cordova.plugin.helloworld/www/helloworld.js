@@ -24,8 +24,8 @@
  * @constructor
  */
 var helloworld = {
-    say: function() {
-	alert("helloworld");
+    say: function(text) {
+	alert("helloworld2"+text);
     }
 };
 
