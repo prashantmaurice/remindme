@@ -34,12 +34,13 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlacesCtrl', function($scope,Cards, Places, $http, $ionicSlideBoxDelegate,$ionicLoading ) {
+    console.log("PLACES page location data:"+JSON.stringify(Cards.getlocation()))
   	$scope.categories = Places.categories();
     $scope.currQuery = "petrol";
     $scope.CLientID = 'B212RBDANHUAROAMLQDQ5RNLMXBAPHDYL52RB3ZLP3ELMJHD';
     $scope.CLiendSecret = 'RXJ3D0OTNYDFKU4Z0QU4Z3G2FHFQ5UVBF3QYA4ZPACWAXTSW';
     $scope.api='https://api.foursquare.com/v2/venues/search?client_id='+$scope.CLientID+'&client_secret='+$scope.CLiendSecret+'&v=20130815';
-    $scope.myLatlng = new google.maps.LatLng(13.057605, 80.228280);//default chennai
+    $scope.myLatlng = new google.maps.LatLng(Cards.getlocation().lat, Cards.getlocation().long);//default chennai
     $scope.radius = 5000;
     $scope.wallet = Cards.wallet();
     $scope.cards = Cards.allCard();
@@ -56,10 +57,13 @@ angular.module('starter.controllers', [])
             $scope.myLatlng.k = position.coords.latitude;
             $scope.myLatlng.B = position.coords.longitude;
             console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
-
+            $scope.initialize2();
 //
         };
         navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2() ,{ timeout: 300 });
+
+
+
     };
 
   	$scope.initialize2 = function() {

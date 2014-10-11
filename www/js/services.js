@@ -91,6 +91,11 @@ services.factory('Cards', function($http) {
         console.log("successfully imported cards from storage:"+data.data.data);
     });
 
+    var location = {
+        lat     :   12,
+        long    :   40
+    }
+
 
     //TODO:make this wallet load data from local storage
     var wallet = [
@@ -116,6 +121,9 @@ services.factory('Cards', function($http) {
     get: function(cardId) {
       // Simple index lookup
       return cards[cardId];
+    },
+    getlocation: function() {
+        return location;
     }
   }
 });
