@@ -18,6 +18,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+        console.log("REACH1");
+
+      cordova.exec(function(data){console.log(JSON.stringify(data))}, function(err) {
+          callback('Nothing to echo.');
+      }, "Device", "getDeviceInfo", ["test"]);
   });
 })
 
