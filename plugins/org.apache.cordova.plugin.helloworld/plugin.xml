@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="org.apache.cordova.plugin.helloworld"
+      version="0.2.0">
+	
+    <name>HelloWorld</name>
+    <description>Cordova HelloWorld Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,example</keywords>
+
+    <js-module src="www/helloworld.js" name="helloworld">
+        <clobbers target="navigator.helloworld" />
+    </js-module>
+    
+</plugin>

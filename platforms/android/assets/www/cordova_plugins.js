@@ -13,6 +13,13 @@ module.exports = [
         "clobbers": [
             "device"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.plugin.helloworld/www/helloworld.js",
+        "id": "org.apache.cordova.plugin.helloworld.helloworld",
+        "clobbers": [
+            "navigator.helloworld"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -20,7 +27,8 @@ module.exports.metadata =
 {
     "com.ionic.keyboard": "1.0.3",
     "org.apache.cordova.console": "0.2.11",
-    "org.apache.cordova.device": "0.2.12"
+    "org.apache.cordova.device": "0.2.12",
+    "org.apache.cordova.plugin.helloworld": "0.2.0"
 }
 // BOTTOM OF METADATA
 });
