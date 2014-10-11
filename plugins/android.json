@@ -33,6 +33,9 @@
         },
         "org.apache.cordova.plugin.helloworld": {
             "PACKAGE_NAME": "com.ionicframework.myapp244960"
+        },
+        "com.maurice": {
+            "PACKAGE_NAME": "com.ionicframework.myapp244960"
         }
     },
     "dependent_plugins": {}

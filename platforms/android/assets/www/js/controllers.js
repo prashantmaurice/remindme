@@ -1,9 +1,11 @@
 angular.module('starter.controllers', [])
 
 
-.controller('CardsCtrl', function($scope, Cards) {
+.controller('CardsCtrl', function($scope, Cards, $ionicPlatform) {
     $scope.wallet = Cards.wallet();
     console.log("TEST:"+Cards.allCard());
+
+
 })
 .controller('AddCardsCtrl', function($scope,Cards,$stateParams) {
         $scope.wallet = Cards.wallet();

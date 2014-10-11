@@ -16,5 +16,5 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-    <plugin name="Echo" value="org.apache.cordova.plugin.Echo" />
+  <plugin name="LocationPlugin" value="com.maurice.plugin.LocationPlugin" />
 </widget>

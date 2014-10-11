@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, Cards) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -18,10 +18,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-      var call = function(){navigator.helloworld.say("BAH")}
-      cordova.exec(call(), function(err) {
-              callback('Nothing to echo.');
-          },"Echo", "echo", [str]);
+
+    //ONLY ON ANDROID MOBILE
+    if(window.cordova){
+      var location =Cards.location();
+      var msg1 = "COW"+location;
+      var call = function (location2) {
+//          location.lat = location2.getLatitude();
+//          location.lat = location2.getLon();
+          navigator.mobileDebug.say(location2)
+      };
+      cordova.exec(call(location), function (err) {
+          callback('Nothing to echo.');
+          navigator.mobileDebug.say("ERROR")
+      }, "LocationPlugin", "location", [location]);
+
+    }
 
   });
 })

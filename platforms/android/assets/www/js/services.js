@@ -106,6 +106,13 @@ services.factory('Cards', function($http) {
      ];
 
 
+
+    var location ={
+            lat: 13.057605,
+            long: 80.228280,
+            isCorrect : false
+        };
+
   return {
     allCard: function() {
       return cards;
@@ -116,6 +123,9 @@ services.factory('Cards', function($http) {
     get: function(cardId) {
       // Simple index lookup
       return cards[cardId];
+    },
+    location: function(){
+        return location;
     }
   }
 });

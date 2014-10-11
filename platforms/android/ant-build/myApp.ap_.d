@@ -47,12 +47,15 @@
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.ionic.keyboard \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.device \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.plugin.helloworld \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.maurice \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.ionic.keyboard/www \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.ionic.keyboard/www/keyboard.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.device/www \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.device/www/device.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.plugin.helloworld/www \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.plugin.helloworld/www/helloworld.js \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.maurice/www \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.maurice/www/mobileDebug.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/css/style.css \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic/version.json \

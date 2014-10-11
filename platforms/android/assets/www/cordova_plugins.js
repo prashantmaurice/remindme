@@ -20,6 +20,13 @@ module.exports = [
         "clobbers": [
             "navigator.helloworld"
         ]
+    },
+    {
+        "file": "plugins/com.maurice/www/mobileDebug.js",
+        "id": "com.maurice.mobileDebug",
+        "clobbers": [
+            "navigator.mobileDebug"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -28,7 +35,8 @@ module.exports.metadata =
     "com.ionic.keyboard": "1.0.3",
     "org.apache.cordova.console": "0.2.11",
     "org.apache.cordova.device": "0.2.12",
-    "org.apache.cordova.plugin.helloworld": "0.2.0"
+    "org.apache.cordova.plugin.helloworld": "0.2.0",
+    "com.maurice": "0.2.0"
 }
 // BOTTOM OF METADATA
 });
