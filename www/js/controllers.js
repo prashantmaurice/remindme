@@ -16,9 +16,8 @@ angular.module('starter.controllers', [])
             console.log(card.toString);
             $scope.wallet.push({
                 id: card.id,
-                name: card.name,
-                country:card.country,
-                type:cardtype.name,
+                card: card.bank,
+                type:cardtype.type,
                 typeId : cardtype.id,
                 categories : cardtype.categories,
                 selected : true
