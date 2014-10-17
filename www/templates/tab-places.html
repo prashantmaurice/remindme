@@ -15,11 +15,12 @@
 
   <ion-content id="map_cont" style="top:58%" scroll="false">
   	<div style="height:100%">
+        <div ng-bind="debug"></div>
         <ion-slide-box show-pager="false" style="height:100%">
             <ion-slide>
                 <div class="box blue" style="height:200px;" >
                     <ion-scroll direction="y" style="width: 100%; height: 2000px" scroll="false">
-                    <div style="height:{{212*places.length+500}}px"><!--TODO: set it automatic bound -->
+                    <div style="height:{{212*places.length+500}}px;"><!--TODO: set it automatic bound -->
                         <div class="list_item" ng-repeat="place in places | orderBy:'distance'" type="item-text-wrap"  ng-click="showDetails(place)" >
                             <span style="font-size: 1.2em;">{{place.name}}</span>
                             <span style="font-size: 0.8em;color:#777;">{{(place.distance/1000).toFixed(2);}}km</span>

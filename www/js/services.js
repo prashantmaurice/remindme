@@ -107,7 +107,7 @@ services.factory('Cards', function($http) {
     //default location - somewhere in desert
     var location = {
         lat     :   12,
-        long    :   40
+        long    :  80.
     }
 
 

@@ -85,15 +85,29 @@ services.factory('Cards', function($http) {
             "selected":true
         }];
     //get data from file(or cloud)
-    var promise = $http.get('cards.json');
-    promise.then(function(data){
-        cards = data.data.data;
-        console.log("successfully imported cards from storage:"+data.data.data);
-    });
+//    var promise = $http.get('cards.json');
+//    promise.then(function(data){
+//        cards = data.data.data;
+//        console.log("successfully imported cards from storage:"+data.data.data);
+//    });
+    //get data from cloud
+//    var promise = $http.get('cards.json');
+//    promise.then(function(data){
+//        cards = data.data.data;
+//        console.log("successfully imported cards from storage:"+data.data.data);
+//    });
+    $http.get('http://localhost:9000/cards/all').then(function(resp) {
+        cards = resp.data.banks;
+        console.log('HTTP RESPONSE:');
+        console.log(resp);
+    }, function(err) {
+        console.error('ERR: Could not get from server', err);
+    })
 
+    //default location - somewhere in desert
     var location = {
         lat     :   12,
-        long    :   40
+        long    :  80.
     }
 
 
@@ -101,8 +115,7 @@ services.factory('Cards', function($http) {
     var wallet = [
         {
             id:1,
-            name:'American Express',
-            country:'Norway',
+            card:'American Express',
             type:'Blue Cash Everyday',
             typeId : 1,
             categories : ["petrol","KFC"],

@@ -15,7 +15,6 @@ angular.module('starter.controllers', [])
         $scope.activate = function(cardtype , card) {
             console.log(card.toString);
             $scope.wallet.push({
-                id: card.id,
                 card: card.bank,
                 type:cardtype.type,
                 typeId : cardtype.id,
@@ -43,6 +42,7 @@ angular.module('starter.controllers', [])
     $scope.radius = 5000;
     $scope.wallet = Cards.wallet();
     $scope.cards = Cards.allCard();
+    $scope.debug = "debug";
 
     //get position
 
@@ -50,22 +50,24 @@ angular.module('starter.controllers', [])
 
 
     $scope.initialize = function(){
+        $scope.debug = "STARTED";
         $scope.showPosition = function (position) {
 //            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
             console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
             $scope.myLatlng.k = position.coords.latitude;
             $scope.myLatlng.B = position.coords.longitude;
             console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
-            $scope.initialize2();
-//
+//            $scope.initialize2();
+          $scope.debug = "Success:"+position.coords.latitude;
         };
-        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2() ,{ timeout: 300 });
+        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2() ,{ timeout: 3000 });
 
 
 
     };
 
   	$scope.initialize2 = function() {
+        $scope.debug = "FAIL:"+position.coords.latitude;
 //        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
 //        navigator.geolocation.getCurrentPosition(showPosition);
 

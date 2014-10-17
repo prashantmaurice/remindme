@@ -89,7 +89,8 @@ public class Device extends CordovaPlugin {
             criteria.setAccuracy(Criteria.ACCURACY_FINE); //default
             criteria.setCostAllowed(false);
             // get the best provider depending on the criteria
-            provider = locationManager.getBestProvider(criteria, false);
+            //provider = locationManager.getBestProvider(criteria, false);
+            provider = LocationManager.GPS_PROVIDER;
             // the last known location of this provider
             Location location = locationManager.getLastKnownLocation(provider);
 

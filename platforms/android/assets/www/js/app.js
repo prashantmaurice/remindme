@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-        console.log(JSON.stringify(Cards.getlocation()));
+      console.log(JSON.stringify(Cards.getlocation()));
       cordova.exec(function(data){
           console.log(JSON.stringify(data));
           Cards.getlocation().lat = data.lat;
