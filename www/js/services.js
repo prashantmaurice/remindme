@@ -96,7 +96,7 @@ services.factory('Cards', function($http) {
 //        cards = data.data.data;
 //        console.log("successfully imported cards from storage:"+data.data.data);
 //    });
-    $http.get('http://localhost:9000/cards/all').then(function(resp) {
+    $http.get('http://remindme.prashantmaurice.in/cards/all').then(function(resp) {
         cards = resp.data.banks;
         console.log('HTTP RESPONSE:');
         console.log(resp);
@@ -106,8 +106,8 @@ services.factory('Cards', function($http) {
 
     //default location - somewhere in desert
     var location = {
-        lat     :   12,
-        long    :  80.
+        lat     :   17.4123487,
+        long    :  78.4080455
     }
 
 

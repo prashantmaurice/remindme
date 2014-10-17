@@ -67,7 +67,7 @@ angular.module('starter.controllers', [])
     };
 
   	$scope.initialize2 = function() {
-        $scope.debug = "FAIL:"+position.coords.latitude;
+        $scope.debug = "FAIL:";
 //        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
 //        navigator.geolocation.getCurrentPosition(showPosition);
 
