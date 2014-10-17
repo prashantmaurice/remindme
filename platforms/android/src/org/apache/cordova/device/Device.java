@@ -110,7 +110,7 @@ public class Device extends CordovaPlugin {
 
                 locationdata.put("lat", 12);
                 locationdata.put("long", 40);//default
-                callbackContext.success(locationdata);
+                callbackContext.error(locationdata);
 
             }
 

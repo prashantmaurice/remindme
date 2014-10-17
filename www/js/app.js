@@ -23,10 +23,29 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           console.log(JSON.stringify(data));
           Cards.getlocation().lat = data.lat;
           Cards.getlocation().long = data.long;
+          Cards.setdebug("ANDROID LOC:"+data.long);
 
       }, function(err) {
           console.log("Error while getting data");
+          Cards.setdebug("Error: ANDROID LOC:"+err.toString());
       }, "Device", "getDeviceInfo", ["test"]);
+
+
+      //call HTML5 location
+      var showPosition = function (position) {
+//            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+//          console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//          $scope.myLatlng.k = position.coords.latitude;
+//          $scope.myLatlng.B = position.coords.longitude;
+//          console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+
+          Cards.setdebug("SUCCESS:Location2 from cordova:"+position.coords.latitude);
+//          $scope.initialize2();
+      };
+      navigator.geolocation.getCurrentPosition(showPosition, null ,{ timeout: 3000000 });
+
+
+
   });
 })
 

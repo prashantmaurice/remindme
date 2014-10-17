@@ -42,7 +42,10 @@ angular.module('starter.controllers', [])
     $scope.radius = 5000;
     $scope.wallet = Cards.wallet();
     $scope.cards = Cards.allCard();
-    $scope.debug = "debug";
+//    Cards.setdebug("WOLLAH");
+//    $scope.debug = Cards.debug();
+    $scope.cards = Cards;
+    Cards.setdebug("PlacesCtrl called:"+new Date().getTime());
 
     //get position
 
@@ -50,24 +53,26 @@ angular.module('starter.controllers', [])
 
 
     $scope.initialize = function(){
-        $scope.debug = "STARTED";
+        Cards.setdebug("initialize called:"+$scope.myLatlng.k);
+//        $scope.debug = "STARTED";
+//        Cards.setdebug("STARTED");
         $scope.showPosition = function (position) {
 //            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
             console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
             $scope.myLatlng.k = position.coords.latitude;
             $scope.myLatlng.B = position.coords.longitude;
             console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
-//            $scope.initialize2();
-          $scope.debug = "Success:"+position.coords.latitude;
+
+            Cards.setdebug("SUCCESS:Location from cordova:"+position.coords.latitude);
+            $scope.initialize2();
         };
-        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2() ,{ timeout: 3000 });
-
-
-
+        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2 ,{ timeout: 3000 });
     };
 
   	$scope.initialize2 = function() {
-        $scope.debug = "FAIL:"+position.coords.latitude;
+        Cards.setdebug("initialize2 called:"+$scope.myLatlng.k);
+        console.log("initialize2 called");
+//        $scope.debug = "FAIL:";
 //        $scope.myLatlng = new google.maps.LatLng(12.983662, 77.638499);
 //        navigator.geolocation.getCurrentPosition(showPosition);
 
@@ -223,7 +228,7 @@ angular.module('starter.controllers', [])
             });
 
             placesTemp[i].category = $scope.currQuery;
-            $scope.evaluateDiscounts(placesTemp[i])
+//            $scope.evaluateDiscounts(placesTemp[i])
             marker.id = placesTemp[i].id;
             marker.place = placesTemp[i];
             google.maps.event.addListener(marker, 'click', function(marker){console.log(this) ; $scope.mapMarkerClick(this)});
