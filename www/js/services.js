@@ -58,33 +58,9 @@ services.factory('Places', function () {
     }
 });
 
-services.factory('Cards', function ($http) {
-    // Some fake testing data
+services.factory('Cards', function ($http,$ionicLoading) {
     //TODO:get this data from server or local storage
-    var cards = [//dummy data //TODO:remove this bit and make sure ur code runs only after import
-        {
-            "id": 1,
-            "name": "American Express",
-            "country": "Norway",
-            "types": [
-                {
-                    "id": 1,
-                    "name": "Blue Cash Everyday",
-                    "cashback": 3,
-                    "rewards": 0,
-                    "categories": ["supermarkets", "petrol", "KFC"]
-                },
-                {
-                    "id": 2,
-                    "name": "Everyday Credit card",
-                    "cashback": 0,
-                    "rewards": 2,
-                    "categories": ["supermarkets", "KFC"]
-                }
-            ],
-            "selected": true
-        }
-    ];
+    var cards = [];
     //get data from file(or cloud)
 //    var promise = $http.get('cards.json');
 //    promise.then(function(data){
@@ -97,11 +73,22 @@ services.factory('Cards', function ($http) {
 //        cards = data.data.data;
 //        console.log("successfully imported cards from storage:"+data.data.data);
 //    });
+    var showLoading = function() {
+        $ionicLoading.show({
+            template : "<i class='ion-loading-d'></i>  Loading Cards...."
+        });
+    };
+    var hideLoading = function(){
+        $ionicLoading.hide();
+    };
+    showLoading();
     $http.get('http://remindme.prashantmaurice.in/cards/all').then(function (resp) {
         cards = resp.data.banks;
         console.log('HTTP CARDS RESPONSE:');
         console.log(resp);
+        hideLoading();
     }, function (err) {        console.error('ERR: Could not get cards from server', err);
+        hideLoading();
     })
 
     //default location - somewhere in desert

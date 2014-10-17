@@ -50,7 +50,9 @@
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/com.ionic.keyboard/www/keyboard.js \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.device/www \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/plugins/org.apache.cordova.device/www/device.js \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/css/Montserrat-Regular.ttf \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/css/style.css \
+/home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/css/Montserrat-Bold.ttf \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic/version.json \
 /home/maurice/Documents/repos/remindme/remindme/platforms/android/assets/www/lib/ionic/fonts \

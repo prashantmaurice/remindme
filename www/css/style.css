@@ -3,15 +3,39 @@
     height: 62px;
     border-bottom: 1px solid #eee;
 }
+span.tab-title{
+    font-family: boldFont;
+    font-size: 1em;
+    text-transform: uppercase;
+}
+.tab-item{
+    max-width: 1000px;
+}
+
+
+
+@font-face {
+    font-family: boldFont;
+    src: url(Montserrat-Bold.ttf);
+}
+@font-face {
+    font-family: lightFont;
+    src: url(Montserrat-Regular.ttf);
+}
+
 /*overload fonts*/
 h1, h2, h3, h4, h5, h6, .col, .bar{
-    font-family: 'Source Sans Pro', sans-serif;
+    /*font-family: 'Source Sans Pro', sans-serif;*/
+    font-family: boldFont;
+}
+.col{
+    color: #98a2b0;
 }
 
 /*----new cards grip ----*/
 .grid50_cont{
     /*width:40%;*/
-    background-color: #4db6ac;
+    background-color: #e8ebed;
     width: 48%;
     margin: 1%;
     display: inline-block;
@@ -26,4 +50,53 @@ h1, h2, h3, h4, h5, h6, .col, .bar{
     width:90%;
     height: 90%;
     margin:5%;
+}
+.bar.bar-header{
+    border: 0;
+    background-color: #e8ebed;
+
+
+}
+.bar .title {
+    /*font-weight: 600;*/
+    color: #98a2b0;
+    font-size: 1em;
+}
+.color-Main{
+    background-color: #465568;
+}
+.item{
+    border-left: 6px solid #E56F62;
+}
+.bar{
+    padding:0px;
+}
+.tabs-striped .tabs{
+    background-color: #212e3d;
+}
+.tabs-striped.tabs-color-light .tab-item.tab-item-active, .tabs-striped.tabs-color-light .tab-item.active, .tabs-striped.tabs-color-light .tab-item.activated {
+    margin-top: -2px;
+    color: #fff;
+    border: 0 solid #E56F62;
+    border-top-width: 3px;
+}
+.has-tabs{
+    background-color: #e8ebed;
+}
+
+/*BUTTONS*/
+.button.button-positive{
+    font-family: boldFont;
+    border-color: #4d9790;
+    /*border-width: 4px;*/
+    background-color: #65c5ba;
+    color: #fff;
+}
+
+.available-cards-page{
+    background-color: #4d9790;
+}
+.bar .button.button-icon{
+    color:#888;
+    font-size: 1em;
 }

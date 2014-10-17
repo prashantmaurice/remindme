@@ -1,9 +1,14 @@
-angular.module('starter.controllers', [])
+var app = angular.module('starter.controllers', []);
+app.constant('$ionicLoadingConfig', {
+    template: 'Loading...'
+})
 
 
-.controller('CardsCtrl', function($scope, Cards) {
+.controller('CardsCtrl', function($scope, Cards, $ionicLoading) {
     $scope.wallet = Cards.wallet();
     console.log("TEST:"+Cards.allCard());
+    var template1 = "<i class='ion-loading-d'></i>Loading";
+
 })
 .controller('AddCardsCtrl', function($scope,Cards,$stateParams) {
         $scope.wallet = Cards.wallet();
