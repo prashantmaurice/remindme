@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, Cards) {
+.run(function($ionicPlatform, Cards,$ionicLoading) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -18,7 +18,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-      console.log(JSON.stringify(Cards.getlocation()));
+
+      //LOCATION
+      console.log("APP READY:"+JSON.stringify(Cards.getlocation()));
+//      var showLoading2 = function() {
+//          $ionicLoading.show({
+//              template : "<i class='ion-loading-d'></i>  Getting Location...."
+//          });
+//      };
+//      var hideLoading = function(){
+//          $ionicLoading.hide();
+//      };
+//      showLoading2();
       cordova.exec(function(data){
           console.log(JSON.stringify(data));
           Cards.getlocation().lat = data.lat;

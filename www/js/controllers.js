@@ -71,10 +71,25 @@ app.constant('$ionicLoadingConfig', {
             Cards.setdebug("SUCCESS:Location from cordova:"+position.coords.latitude);
             $scope.initialize2();
         };
-        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2 ,{ timeout: 3000 });
+        var showLoading = function() {
+            $ionicLoading.show({
+                template : "<i class='ion-loading-d'></i>  Getting Location from Cordova...."
+            });
+        };
+        showLoading();
+        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.cordovaLocFail ,{ timeout: 3000 });
     };
+    $scope.cordovaLocFail = function(){
+        $scope.loadingIndicator4 = $ionicLoading.show({
+            template: 'timedout.. adding task to background'
+        });
+        setTimeout(function(){$scope.loadingIndicator4.hide()}, 1000);
+        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2 ,{ timeout: 3000000 });
+        $scope.initialize2();
+    }
 
   	$scope.initialize2 = function() {
+        $ionicLoading.hide();
         Cards.setdebug("initialize2 called:"+$scope.myLatlng.k);
         console.log("initialize2 called");
 //        $scope.debug = "FAIL:";
@@ -160,19 +175,28 @@ app.constant('$ionicLoadingConfig', {
     $scope.getPlaces = function(lat,long,query) {
         $scope.currQuery = query;
         console.log("API:"+$scope.api+'&ll='+lat+','+$scope.myLatlng.B+'&query='+query+'');
-        $scope.loadingIndicator = $ionicLoading.show({
+        $scope.loadingIndicator2 = $ionicLoading.show({
             content: 'Showing Loading Indicator!',
-            template: '<i class="ion-looping"></i>',
+            template: '<i class="ion-looping"></i> getting venues from Foursquare',
             animation: 'fade-in',
             showBackdrop: false,
             maxWidth: 200,
             showDelay: 10
         });
         $http.get($scope.api+'&ll='+$scope.myLatlng.k+','+$scope.myLatlng.B+'&query='+query+'').then(function(resp) {
-            $ionicLoading.hide();
+            $scope.loadingIndicator2.hide();
+            $scope.loadingIndicator3 = $ionicLoading.show({
+                template: 'successfully acquired'
+            });
+            setTimeout(function(){$scope.loadingIndicator3.hide()}, 1000);
             $scope.populateMap($scope.myLatlng.k,$scope.myLatlng.B,query,resp,null);
         }, function(err) {
             console.error('ERR', err);
+            $scope.loadingIndicator2.hide();
+            $scope.loadingIndicator3 = $ionicLoading.show({
+                template: '<i class="ion-looping"></i> Could not get data'
+            });
+            setTimeout(function(){$scope.loadingIndicator3.hide()}, 1000);
             // err.status will contain the status code
         });
 
@@ -201,7 +225,14 @@ app.constant('$ionicLoadingConfig', {
 
     //populate map
     $scope.populateMap = function(lat,long,query,resp,place) {
-
+        $scope.loadingIndicator = $ionicLoading.show({
+            content: 'Showing Loading Indicator!',
+            template: '<i class="ion-looping"></i> Populating results',
+            animation: 'fade-in',
+            showBackdrop: false,
+            maxWidth: 200,
+            showDelay: 10
+        });
 
         if(place!=null) $scope.clickedPlace = place;
         if(resp!=null) var placesTemp = resp.data.response.venues;
@@ -246,6 +277,7 @@ app.constant('$ionicLoadingConfig', {
         $ionicSlideBoxDelegate.enableSlide(false);//disable slider
         Places.set($scope.places);
         console.log($scope.places);
+        $scope.loadingIndicator.hide();
 
     };
     $scope.evaluateDiscounts = function(place) {

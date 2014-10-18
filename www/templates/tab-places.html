@@ -2,7 +2,20 @@
     <div class="bar bar-header" style="height:50%;width: 100%;"><div id="map-canvas2" style="height:100%;width: 100%;"></div>
 
     </div>
-    <div class="bar bar-subheader" style="top:50%; height:8%">
+    <!--<div class="bar bar-subheader" style="top:50%; height:8%">-->
+        <!--<ion-scroll direction="x" style="overflow: scroll;white-space: nowrap;">-->
+            <!--<button ng-repeat="category in categories" style="margin-right:3px; height:100%"-->
+                    <!--ng-class="{'button-positive': (category.name!==currQuery),'button-assertive': category.name===currQuery}"-->
+                    <!--class="button button-small"-->
+                    <!--ng-click="getPlacesCurr(category.name)">-->
+                <!--{{category.name}}-->
+            <!--</button>-->
+        <!--</ion-scroll>-->
+    <!--</div>-->
+
+  <ion-content id="map_cont" style="top:50%;margin-top: 0px;" scroll="false">
+  	<div style="height:100%">
+        <!--<div ng-bind="cards.debug()"></div>-->
         <ion-scroll direction="x" style="overflow: scroll;white-space: nowrap;">
             <button ng-repeat="category in categories" style="margin-right:3px; height:100%"
                     ng-class="{'button-positive': (category.name!==currQuery),'button-assertive': category.name===currQuery}"
@@ -11,11 +24,6 @@
                 {{category.name}}
             </button>
         </ion-scroll>
-    </div>
-
-  <ion-content id="map_cont" style="top:58%" scroll="false">
-  	<div style="height:100%">
-        <div ng-bind="cards.debug()"></div>
         <ion-slide-box show-pager="false" style="height:100%">
             <ion-slide>
                 <div class="box blue" style="height:200px;" >
