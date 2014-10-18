@@ -9,7 +9,7 @@ services.factory('Places', function () {
     var categories = [
         { id: 0, name: 'Restaurent' },
         { id: 1, name: 'Petrol' },
-        { id: 2, name: 'KFC' },
+        { id: 2, name: 'kfc' },
         { id: 2, name: 'bar' },
         { id: 2, name: 'Super markets' },
         { id: 2, name: 'MC Donalds' },
@@ -122,14 +122,14 @@ services.factory('Cards', function ($http,$ionicLoading) {
 
     //TODO:make this wallet load data from local storage
     var wallet = [
-        {
-            id: 1,
-            card: 'American Express',
-            type: 'Blue Cash Everyday',
-            typeId: 1,
-            categories: ["petrol", "KFC"],
-            selected: true
-        }
+//        {
+//            id: 1,
+//            card: 'American Express',
+//            type: 'Blue Cash Everyday',
+//            typeId: 1,
+//            categories: ["petrol", "KFC"],
+//            selected: true
+//        }
     ];
     //var debug = "debug string";
 
