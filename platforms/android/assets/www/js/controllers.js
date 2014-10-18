@@ -3,7 +3,9 @@ app.constant('$ionicLoadingConfig', {
     template: 'Loading...'
 })
 
-
+.controller('Global', function($scope, Cards) {
+    $scope.asyncDebug = Cards.getdebug2();
+})
 .controller('CardsCtrl', function($scope, Cards, $ionicLoading) {
     $scope.wallet = Cards.wallet();
     console.log("TEST:"+Cards.allCard());
@@ -57,38 +59,38 @@ app.constant('$ionicLoadingConfig', {
 
 
 
-    $scope.initialize = function(){
-        Cards.setdebug("initialize called:"+$scope.myLatlng.k);
-//        $scope.debug = "STARTED";
-//        Cards.setdebug("STARTED");
-        $scope.showPosition = function (position) {
-//            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
-            console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
-            $scope.myLatlng.k = position.coords.latitude;
-            $scope.myLatlng.B = position.coords.longitude;
-            console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//    $scope.initialize = function(){
+//        Cards.setdebug("initialize called:"+$scope.myLatlng.k);
+////        $scope.debug = "STARTED";
+////        Cards.setdebug("STARTED");
+//        $scope.showPosition = function (position) {
+////            alert("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+//            console.log("position set from :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//            $scope.myLatlng.k = position.coords.latitude;
+//            $scope.myLatlng.B = position.coords.longitude;
+//            console.log("position set to :"+$scope.myLatlng.k+"==="+$scope.myLatlng.B);
+//
+//            Cards.setdebug("SUCCESS:Location from cordova:"+position.coords.latitude);
+//            $scope.initialize2();
+//        };
+//        var showLoading = function() {
+//            $ionicLoading.show({
+//                template : "<i class='ion-loading-d'></i>  Getting Location from Cordova...."
+//            });
+//        };
+//        //showLoading();
+//        //navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.cordovaLocFail ,{ timeout: 3000 });
+//    };
+//    $scope.cordovaLocFail = function(){
+//        $scope.loadingIndicator4 = $ionicLoading.show({
+//            template: 'timedout.. adding task to background'
+//        });
+//        setTimeout(function(){$scope.loadingIndicator4.hide()}, 1000);
+//        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2 ,{ timeout: 3000000 });
+//        $scope.initialize2();
+//    }
 
-            Cards.setdebug("SUCCESS:Location from cordova:"+position.coords.latitude);
-            $scope.initialize2();
-        };
-        var showLoading = function() {
-            $ionicLoading.show({
-                template : "<i class='ion-loading-d'></i>  Getting Location from Cordova...."
-            });
-        };
-        showLoading();
-        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.cordovaLocFail ,{ timeout: 3000 });
-    };
-    $scope.cordovaLocFail = function(){
-        $scope.loadingIndicator4 = $ionicLoading.show({
-            template: 'timedout.. adding task to background'
-        });
-        setTimeout(function(){$scope.loadingIndicator4.hide()}, 1000);
-        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.initialize2 ,{ timeout: 3000000 });
-        $scope.initialize2();
-    }
-
-  	$scope.initialize2 = function() {
+  	$scope.initialize = function() {
         $ionicLoading.hide();
         Cards.setdebug("initialize2 called:"+$scope.myLatlng.k);
         console.log("initialize2 called");
@@ -141,6 +143,7 @@ app.constant('$ionicLoadingConfig', {
         var cityCircle = new google.maps.Circle(populationOptions);
         cityCircle.bindTo('center', marker_mylocation, 'position');
         google.maps.event.addListener(marker_mylocation, 'dragend', reDrawMarkers );
+        google.maps.event.addListener(cityCircle, 'center_changed', reDrawMarkers );
         google.maps.event.addListener(cityCircle, 'radius_changed', reDrawMarkers);
 
         function toggleBounce() {
@@ -152,6 +155,11 @@ app.constant('$ionicLoadingConfig', {
         }
         function reDrawMarkers(){
             console.log(marker_mylocation.position);
+            var location = Cards.getlocation;
+            location.lat = marker_mylocation.position.latitude;
+            location.long = marker_mylocation.position.longitude;
+
+
             $scope.myLatlng  = marker_mylocation.position;
             $scope.radius = cityCircle.radius;
 

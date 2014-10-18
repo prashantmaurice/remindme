@@ -4,21 +4,8 @@ var services = angular.module('starter.services', []);
  * A simple example service that returns some data.
  */
 services.factory('Places', function () {
-    // Might use a resource here that returns a JSON array
 
     // Some fake testing data
-    var friends = [
-        { id: 0, name: 'Scruff McGruff' },
-        { id: 1, name: 'G.I. Joe' },
-        { id: 2, name: 'Miss Frizzle' },
-        { id: 3, name: 'Ash Ketchum' },
-        { id: 4, name: 'Miss Frizzle' },
-        { id: 5, name: 'Ash Ketchum' },
-        { id: 6, name: 'Miss Frizzle' },
-        { id: 7, name: 'Ash Ketchum' },
-        { id: 8, name: 'Miss Frizzle' },
-        { id: 9, name: 'Ash Ketchum' }
-    ];
     var categories = [
         { id: 0, name: 'Restaurent' },
         { id: 1, name: 'Petrol' },
@@ -61,6 +48,17 @@ services.factory('Places', function () {
 services.factory('Cards', function ($http,$ionicLoading) {
     //TODO:get this data from server or local storage
     var cards = [];
+    //default location - somewhere in desert
+    var location = {
+        lat: 17.4123487,
+        long: 78.4080455
+    };
+    var debug = {
+        async : null,
+        string : "debug string"
+    };
+//    debug.async = "<i class='ion-loading-d'></i>";
+
     //get data from file(or cloud)
 //    var promise = $http.get('cards.json');
 //    promise.then(function(data){
@@ -73,29 +71,53 @@ services.factory('Cards', function ($http,$ionicLoading) {
 //        cards = data.data.data;
 //        console.log("successfully imported cards from storage:"+data.data.data);
 //    });
-    var showLoading = function() {
-        $ionicLoading.show({
-            template : "<i class='ion-loading-d'></i>  Loading Cards...."
+
+    //GET CARDS FROM SERVER
+    var getCardsFromServer = function(){
+        var loading1 = $ionicLoading.show({template : "<i class='ion-loading-d'></i>  Loading Cards...."});
+        $http.get('http://remindme.prashantmaurice.in/cards/all').then(function (resp) {
+            cards = resp.data.banks;
+            console.log('HTTP CARDS RESPONSE:');
+            console.log(resp);
+            loading1.hide();
+            var loading2 = $ionicLoading.show({template : "Successfully loaded cards"});
+            setTimeout(function(){loading2.hide()}, 1000);
+        }, function (err) {        console.error('ERR: Could not get cards from server', err);
+            loading1.hide();
+            var loading2 = $ionicLoading.show({template : "ERROR: could not connect to server"});
+            setTimeout(function(){loading2.hide()}, 1000);
         });
     };
-    var hideLoading = function(){
-        $ionicLoading.hide();
-    };
-    showLoading();
-    $http.get('http://remindme.prashantmaurice.in/cards/all').then(function (resp) {
-        cards = resp.data.banks;
-        console.log('HTTP CARDS RESPONSE:');
-        console.log(resp);
-        hideLoading();
-    }, function (err) {        console.error('ERR: Could not get cards from server', err);
-        hideLoading();
-    })
+    getCardsFromServer();
 
-    //default location - somewhere in desert
-    var location = {
-        lat: 17.4123487,
-        long: 78.4080455
-    }
+//    //GET LOCATION FROM CORDOVA
+    var savePosition = function (position) {
+//        debug.async = null;
+        console.log("cordova:position set from :"+location.lat+"==="+location.long);
+        location.lat = position.coords.latitude;
+        location.long = position.coords.longitude;
+        console.log("cordova:position set to :"+location.lat+"==="+location.long);
+        debug.string = "SUCCESS:Location from cordova:"+position.coords.latitude;
+//        loadingIndicator5.hide();
+        debug.async = "Successfully retreived location from cordova";
+        setTimeout(function(){debug.async = null}, 1000);
+    };
+    var cordovaLocFail = function(){
+//        debug.async = null;
+//        loadingIndicator5.hide();
+        debug.async = "Failed to get location from cordova";
+//        var loadingIndicator4 = $ionicLoading.show({template: 'timedout.. adding task to background'});
+        setTimeout(function(){debug.async = null}, 1000);
+//        navigator.geolocation.getCurrentPosition(savePosition, cordovaLocFail ,{ timeout: 3000000 });
+    };
+    debug.async = "<i class='ion-loading-d'></i> Getting location from cordova";
+    navigator.geolocation.getCurrentPosition(savePosition, cordovaLocFail ,{ timeout: 3000 });
+
+
+
+
+
+
 
 
     //TODO:make this wallet load data from local storage
@@ -109,8 +131,7 @@ services.factory('Cards', function ($http,$ionicLoading) {
             selected: true
         }
     ];
-    var debug = "debug string";
-
+    //var debug = "debug string";
 
     return {
         allCard: function () {
@@ -127,11 +148,19 @@ services.factory('Cards', function ($http,$ionicLoading) {
             return location;
         },
         debug: function () {
-            return debug;
+            return debug.string;
         },
         setdebug: function (str) {
-            debug = str;
+            debug.string = str;
+            return debug.string;
+        },
+        getcardsfromserver: function(){
+            getCardsFromServer();
+            return;
+        },
+        getdebug2: function () {
             return debug;
         }
+
     }
 });

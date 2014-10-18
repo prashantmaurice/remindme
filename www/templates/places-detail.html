@@ -5,40 +5,31 @@
   The Friends service returns an array of friend data
 -->
 <ion-view title="details" hide-nav-bar="false" >
-    <ion-content padding="true" style="padding-top: 50px">
+    <ion-content padding="true" style="padding-top: 0px; font-family: boldFont; color: #30455b; font-size: 0.9em">
+        <span style="font-size: 1.2em"> {{place.name}}</span>
         <div class="list card">
-            <div class="item item-avatar">
-                <h2>{{place.name}}</h2>
-            </div>
-            <a href="#" class="item item-icon-left">
-                <i class="icon ion-ios7-telephone"></i>
-                {{place.contact.formattedPhone}}
-                <i class="icon ion-flag"></i>
-                {{place.location.formattedAddress.join(", ")}}
-                <i class="icon ion-music-note"></i>
-                {{place.categories.shortName==null}}{{place.distance}}
-            </a>
+            <div class="item " style="color: #9ca5b4; font-size: 0.9em">
+                <span>
+                {{place.contact.formattedPhone}}</span><br>
+                <div>
+                {{place.location.formattedAddress.join(", ")}}</div><br>
+                <span>
+                distance = {{place.distance}}</span><br>
 
-        </div>
+                <br><br>
+                <span style="color: #9ca5b4">Optimum card for Maximum Rewards</span>
 
-        <span>Optimum card for Maximum Rewards</span>
-        <div class="list card">
-            <div class="item item-avatar">
                 <h2>{{wallet[place.rewardCardNum].name}}</h2>
                 <h4>{{wallet[place.rewardCardNum].type}}</h4>
                 rewards : {{place.rewards}}X
-            </div>
 
-        </div>
+                <br><br>
+                <span style="color: #9ca5b4">Optimum card for Maximum CashBack</span>
 
-        <span>Optimum card for Maximum CashBack</span>
-        <div class="list card">
-            <div class="item item-avatar">
                 <h2>{{wallet[place.cashbackCardNum].name}}</h2>
                 <h4>{{wallet[place.cashbackCardNum].type}}</h4>
                 rewards : {{place.cashback}}%
             </div>
-
         </div>
     </ion-content>
 </ion-view>

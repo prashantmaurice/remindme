@@ -30,15 +30,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 //          $ionicLoading.hide();
 //      };
 //      showLoading2();
+      var debug = Cards.getdebug2();
+      debug.async = "Requesting known location from GPS";
       cordova.exec(function(data){
           console.log(JSON.stringify(data));
           Cards.getlocation().lat = data.lat;
           Cards.getlocation().long = data.long;
           Cards.setdebug("ANDROID LOC:"+data.long);
+          debug.async = null;
 
       }, function(err) {
           console.log("Error while getting data");
           Cards.setdebug("Error: ANDROID LOC:"+err.toString());
+          debug.async = "GPS ERROR:"+err.toString();
       }, "Device", "getDeviceInfo", ["test"]);
 
 

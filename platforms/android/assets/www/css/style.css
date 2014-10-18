@@ -100,3 +100,15 @@ h1, h2, h3, h4, h5, h6, .col, .bar{
     color:#888;
     font-size: 1em;
 }
+
+/*TOP ASYNC FEEDBACK*/
+#async-feedback{
+    background-color: #000;
+    opacity: 0.5;
+    color: #fff;
+    font-family: lightFont;
+    bottom: 48px;
+    align-items: center;
+    height: 30px;
+    font-size: 0.8em;
+}
