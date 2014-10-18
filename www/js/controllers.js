@@ -294,6 +294,7 @@ app.constant('$ionicLoadingConfig', {
         var category = place.category;
         var wallet = $scope.wallet;
         for(var i=0; i<wallet.length;i++){
+            if(!wallet[i].selected) continue;
             for(var j=0; j<wallet[i].rewards.length;j++){
                 for(var k=0; k<wallet[i].rewards[j].categories.length;k++) {
                     console.log('TESTMATCH:'+category+"=="+wallet[i].rewards[j].categories[k]);
@@ -310,27 +311,6 @@ app.constant('$ionicLoadingConfig', {
                 }
             }
         }
-//        for(var i=0; i<wallet.length;i++){
-//            var categoriesAvailable = wallet[i].categories;
-//            for(var j=0; j<categoriesAvailable.length;j++){
-//                if(categoriesAvailable[j]==category){
-//                    console.log('MATCH:'+category+"=="+wallet[i].id+"=="+wallet[i].typeId);
-//                    var cardFound = $scope.getType(wallet[i].id, wallet[i].typeId);
-//                    if(place.rewards!=null) {
-//                        if (place.rewards < cardFound.rewards){
-//                            place.rewards = cardFound.rewards;
-//                            place.rewardCardNum = i;
-//                        }
-//                    }else {place.rewards = cardFound.rewards;place.rewardCardNum = i;}
-//
-//                    if(place.cashback!=null) {
-//                        if (place.cashback < cardFound.cashback)
-//                        {place.cashback = cardFound.cashback;
-//                            place.cashbackCardNum = i;}
-//                    }else {place.cashback = cardFound.cashback;place.cashbackCardNum = i;}
-//                }
-//            }
-//        }
     };
     $scope.getType =  function(cardId,cardTypeId) {
         // Simple index lookup

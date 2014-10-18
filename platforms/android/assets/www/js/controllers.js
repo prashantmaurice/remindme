@@ -22,9 +22,10 @@ app.constant('$ionicLoadingConfig', {
         $scope.activate = function(cardtype , card) {
             console.log(card.toString);
             $scope.wallet.push({
-                card: card.bank,
+                bank: card.bank,
                 type:cardtype.type,
                 typeId : cardtype.id,
+                rewards : cardtype.rewards,
                 categories : cardtype.categories,
                 selected : true
             });
@@ -173,7 +174,7 @@ app.constant('$ionicLoadingConfig', {
         }
 
         //last initialize
-        $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B,'KFC');
+        $scope.getPlaces($scope.myLatlng.k, $scope.myLatlng.B,'kfc');
 
   	};
     var markers = [];
@@ -183,7 +184,7 @@ app.constant('$ionicLoadingConfig', {
     $scope.getPlaces = function(lat,long,query) {
         $scope.currQuery = query;
         console.log("API:"+$scope.api+'&ll='+lat+','+$scope.myLatlng.B+'&query='+query+'');
-        $scope.loadingIndicator2 = $ionicLoading.show({
+        $ionicLoading.show({
             content: 'Showing Loading Indicator!',
             template: '<i class="ion-looping"></i> getting venues from Foursquare',
             animation: 'fade-in',
@@ -192,19 +193,19 @@ app.constant('$ionicLoadingConfig', {
             showDelay: 10
         });
         $http.get($scope.api+'&ll='+$scope.myLatlng.k+','+$scope.myLatlng.B+'&query='+query+'').then(function(resp) {
-            $scope.loadingIndicator2.hide();
-            $scope.loadingIndicator3 = $ionicLoading.show({
+            $ionicLoading.hide();
+            $ionicLoading.show({
                 template: 'successfully acquired'
             });
-            setTimeout(function(){$scope.loadingIndicator3.hide()}, 1000);
+            setTimeout(function(){$ionicLoading.hide()}, 1000);
             $scope.populateMap($scope.myLatlng.k,$scope.myLatlng.B,query,resp,null);
         }, function(err) {
             console.error('ERR', err);
-            $scope.loadingIndicator2.hide();
-            $scope.loadingIndicator3 = $ionicLoading.show({
+            $ionicLoading.hide();
+            $ionicLoading.show({
                 template: '<i class="ion-looping"></i> Could not get data'
             });
-            setTimeout(function(){$scope.loadingIndicator3.hide()}, 1000);
+            setTimeout(function(){$ionicLoading.hide()}, 1000);
             // err.status will contain the status code
         });
 
@@ -272,7 +273,7 @@ app.constant('$ionicLoadingConfig', {
             });
 
             placesTemp[i].category = $scope.currQuery;
-//            $scope.evaluateDiscounts(placesTemp[i])
+            $scope.evaluateDiscounts(placesTemp[i]);
             marker.id = placesTemp[i].id;
             marker.place = placesTemp[i];
             google.maps.event.addListener(marker, 'click', function(marker){console.log(this) ; $scope.mapMarkerClick(this)});
@@ -285,33 +286,51 @@ app.constant('$ionicLoadingConfig', {
         $ionicSlideBoxDelegate.enableSlide(false);//disable slider
         Places.set($scope.places);
         console.log($scope.places);
-        $scope.loadingIndicator.hide();
+        $ionicLoading.hide();
 
     };
     $scope.evaluateDiscounts = function(place) {
+        console.log("EVALUATING DISCOUNTS");
         var category = place.category;
         var wallet = $scope.wallet;
         for(var i=0; i<wallet.length;i++){
-            var categoriesAvailable = wallet[i].categories;
-            for(var j=0; j<categoriesAvailable.length;j++){
-                if(categoriesAvailable[j]==category){
-                    console.log('MATCH:'+category+"=="+wallet[i].id+"=="+wallet[i].typeId);
-                    var cardFound = $scope.getType(wallet[i].id, wallet[i].typeId);
-                    if(place.rewards!=null) {
-                        if (place.rewards < cardFound.rewards){
-                            place.rewards = cardFound.rewards;
-                            place.rewardCardNum = i;
-                        }
-                    }else {place.rewards = cardFound.rewards;place.rewardCardNum = i;}
-
-                    if(place.cashback!=null) {
-                        if (place.cashback < cardFound.cashback)
-                        {place.cashback = cardFound.cashback;
-                            place.cashbackCardNum = i;}
-                    }else {place.cashback = cardFound.cashback;place.cashbackCardNum = i;}
+            for(var j=0; j<wallet[i].rewards.length;j++){
+                for(var k=0; k<wallet[i].rewards[j].categories.length;k++) {
+                    console.log('TESTMATCH:'+category+"=="+wallet[i].rewards[j].categories[k]);
+                    if(wallet[i].rewards[j].categories[k]==category){
+                        console.log('MATCH:'+category+"=="+wallet[i].type+"=="+wallet[i].typeId);
+                        if(place.rewards!=null) {
+                            if (place.rewards < wallet[i].rewards[j].rewards){
+                                place.rewards = wallet[i].rewards[j].rewards;
+                                place.rewardCardNum = i;
+                                place.rewardwallet = wallet[i];
+                            }
+                        }else {place.rewards = wallet[i].rewards[j].rewards;place.rewardCardNum = i;}
+                    }
                 }
             }
         }
+//        for(var i=0; i<wallet.length;i++){
+//            var categoriesAvailable = wallet[i].categories;
+//            for(var j=0; j<categoriesAvailable.length;j++){
+//                if(categoriesAvailable[j]==category){
+//                    console.log('MATCH:'+category+"=="+wallet[i].id+"=="+wallet[i].typeId);
+//                    var cardFound = $scope.getType(wallet[i].id, wallet[i].typeId);
+//                    if(place.rewards!=null) {
+//                        if (place.rewards < cardFound.rewards){
+//                            place.rewards = cardFound.rewards;
+//                            place.rewardCardNum = i;
+//                        }
+//                    }else {place.rewards = cardFound.rewards;place.rewardCardNum = i;}
+//
+//                    if(place.cashback!=null) {
+//                        if (place.cashback < cardFound.cashback)
+//                        {place.cashback = cardFound.cashback;
+//                            place.cashbackCardNum = i;}
+//                    }else {place.cashback = cardFound.cashback;place.cashbackCardNum = i;}
+//                }
+//            }
+//        }
     };
     $scope.getType =  function(cardId,cardTypeId) {
         // Simple index lookup
@@ -386,9 +405,9 @@ app.constant('$ionicLoadingConfig', {
 })
 
 .controller('PlacesDetailCtrl', function($scope, Cards,$stateParams, Places) {
-        console.log($stateParams.friendId);
-        console.log(Places.getall());
-        console.log(Places.get($stateParams.friendId));
+    console.log($stateParams.friendId);
+    console.log(Places.getall());
+    console.log(Places.get($stateParams.friendId));
     $scope.place = Places.get($stateParams.friendId);
         $scope.wallet = Cards.wallet();
         $scope.cards = Cards.allCard();

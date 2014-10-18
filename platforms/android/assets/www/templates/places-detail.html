@@ -14,21 +14,21 @@
                 <div>
                 {{place.location.formattedAddress.join(", ")}}</div><br>
                 <span>
-                distance = {{place.distance}}</span><br>
+                distance = {{(place.distance/1000).toFixed(2)}}km</span><br>
 
                 <br><br>
                 <span style="color: #9ca5b4">Optimum card for Maximum Rewards</span>
 
-                <h2>{{wallet[place.rewardCardNum].name}}</h2>
-                <h4>{{wallet[place.rewardCardNum].type}}</h4>
+                <h2 style="color: #30455b">{{place.rewardwallet.bank}}</h2>
+                <h4 style="color: #30455b">{{wallet[place.rewardCardNum].type}}</h4>
                 rewards : {{place.rewards}}X
 
-                <br><br>
-                <span style="color: #9ca5b4">Optimum card for Maximum CashBack</span>
+                <!--<br><br>-->
+                <!--<span style="color: #9ca5b4">Optimum card for Maximum CashBack</span>-->
 
-                <h2>{{wallet[place.cashbackCardNum].name}}</h2>
-                <h4>{{wallet[place.cashbackCardNum].type}}</h4>
-                rewards : {{place.cashback}}%
+                <!--<h2>{{wallet[place.cashbackCardNum].name}}</h2>-->
+                <!--<h4>{{wallet[place.cashbackCardNum].type}}</h4>-->
+                <!--rewards : {{place.cashback}}%-->
             </div>
         </div>
     </ion-content>
